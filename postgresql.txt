@@ -1,0 +1,86 @@
+database: kiosk
+username: kiosk
+master password: christos
+
+
+CREATE USER xdrivel WITH PASSWORD 'xdrivel';
+GRANT ALL PRIVILEGES ON DATABASE kiosk TO xdrivel;
+
+
+user xdrivel/xdrivel
+
+
+--sessions 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE sessions (
+    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL,
+	is_active BOOLEAN DEFAULT FALSE,
+    
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id)
+        REFERENCES users (uuid)
+        ON DELETE CASCADE
+);
+
+
+--users
+CREATE TABLE users (
+    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+	username VARCHAR(32),
+	fullname VARCHAR(64),
+	phone VARCHAR(32),
+	id_num VARCHAR(16),
+	pass VARCHAR(32),	
+	is_admin BOOLEAN DEFAULT FALSE,
+	can_view_reports BOOLEAN DEFAULT FALSE,
+	can_edit_products BOOLEAN DEFAULT FALSE,
+	can_edit_products_full BOOLEAN DEFAULT FALSE,    
+    created_at TIMESTAMP DEFAULT NOW(),
+	is_unlock BOOLEAN DEFAULT FALSE,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+
+INSERT INTO users (
+    username, fullname, phone, id_num, pass,
+    is_admin, can_view_reports, can_edit_products, can_edit_products_full
+) VALUES (
+    'christos', 'Christos Ploutarchou', '+357-99-518802', 'ID123456', '123',
+    TRUE, TRUE, TRUE, FALSE
+);
+
+INSERT INTO users (
+    username, fullname, phone, id_num, pass,
+    is_admin, can_view_reports, can_edit_products, can_edit_products_full, is_unlock
+) VALUES (
+    'unlock', 'unlock', '0', '0', '123',
+    TRUE, TRUE, TRUE, FALSE, TRUE
+);
+
+-------------------------------------------------------------------------
+
+--VAT Types
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE vat_types (
+    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    description VARCHAR(32),
+    vat INTEGER
+);
+
+INSERT INTO vat_types (uuid, description, vat)
+VALUES (gen_random_uuid(), 'V.A.T 0%', 0);
+
+INSERT INTO vat_types (uuid, description, vat)
+VALUES (gen_random_uuid(), 'V.A.T 3%', 3);
+
+INSERT INTO vat_types (uuid, description, vat)
+VALUES (gen_random_uuid(), 'V.A.T 5%', 5);
+
+INSERT INTO vat_types (uuid, description, vat)
+VALUES (gen_random_uuid(), 'V.A.T 9%', 9);
+
+INSERT INTO vat_types (uuid, description, vat)
+VALUES (gen_random_uuid(), 'V.A.T 19%', 19);
