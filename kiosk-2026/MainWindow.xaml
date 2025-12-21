@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kiosk_2026"
         mc:Ignorable="d"
-        Title="Login" Height="535" Width="751" ResizeMode="NoResize" Background="#FFD4D0C8">
+        Title="Login" Height="570" Width="765" ResizeMode="NoResize" Background="#FFD4D0C8">
     <Canvas Height="NaN" Margin="10,17,456,17">
         <ListBox x:Name="lstboxUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFE1C0" FontFamily="Segoe UI Semibold" FontSize="20" Height="485" HorizontalAlignment="Left" VerticalAlignment="Center" Width="285"/>
         <PasswordBox x:Name="txtBoxPassword" HorizontalAlignment="Center" VerticalAlignment="Top" Width="404" FontSize="20" Background="#FFFFE1C0" Canvas.Left="315" Canvas.Top="179" />
@@ -23,6 +23,8 @@
         <Button x:Name="btnBack" Content="Back" Canvas.Left="567" Canvas.Top="303" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button x:Name="btnLogin" Content="Login" Canvas.Left="567" Canvas.Top="369" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button x:Name="btnExit" Content="Exit" Canvas.Left="567" Canvas.Top="434" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="lblLoginTitle1" Content="Label" Canvas.Left="445" Canvas.Top="7" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe UI Black"/>
+        <Label x:Name="lblLoginTitle2" Content="Label" Canvas.Left="345" Canvas.Top="51" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
     </Canvas>
 
 </Window>

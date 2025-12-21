@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026\\kiosk-2026\\kiosk-2026.vbproj": {}
+    "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\kiosk-2026.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026\\kiosk-2026\\kiosk-2026.vbproj": {
+    "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\kiosk-2026.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026\\kiosk-2026\\kiosk-2026.vbproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\kiosk-2026.vbproj",
         "projectName": "kiosk-2026",
-        "projectPath": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026\\kiosk-2026\\kiosk-2026.vbproj",
+        "projectPath": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\kiosk-2026.vbproj",
         "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026\\kiosk-2026\\obj\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

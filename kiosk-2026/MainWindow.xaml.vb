@@ -10,6 +10,7 @@ Class MainWindow
         ' 1- Load params file (params.txt)
         '--------------------------------------------------
         Dim FILE_NAME As String = "C:\params.txt"
+        Dim sql As String = ""
 
         If Not File.Exists(FILE_NAME) Then
             MessageBox.Show("Error while reading params file. Contact admin.",
@@ -33,16 +34,12 @@ Class MainWindow
             divideFactor5 = params(2).Replace(",", ".")
             divideFactor19 = params(3).Replace(",", ".")
             dualMonitor = (params(4).Trim() = "1")
-            kioskid = (params(5).Trim() = "1")
+            kioskid = params(5)
 
         Catch ex As Exception
             MessageBox.Show("Error loading parameters: " & ex.Message)
             Return
         End Try
-        '--------------------------------------------------
-        ' kiosk_id mapping
-        ' create table kiosk (kiosk_name, kiosk_id) - use kiosk_id (uuid) in all queries
-        '--------------------------------------------------
 
         '--------------------------------------------------
         ' 1 - Load users from PostgreSQL
@@ -51,7 +48,12 @@ Class MainWindow
             Using conn = PostgresConnection.GetConnection()
                 conn.Open()
 
-                Using cmd As New NpgsqlCommand("SELECT username FROM users Where kiosk_id = ORDER BY username;", conn)
+                ' Use parameterized query to prevent SQL injection
+                sql = "SELECT username FROM users WHERE kioskid = @kioskid ORDER BY username;"
+                Using cmd As New NpgsqlCommand(sql, conn)
+                    ' Ensure kioskid is passed as UUID type if needed
+                    cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
+
                     Using reader = cmd.ExecuteReader()
                         lstboxUsers.Items.Clear()
                         While reader.Read()
@@ -63,29 +65,31 @@ Class MainWindow
                 Console.WriteLine("Connected to DB: " & conn.Database)
             End Using
         Catch ex As Exception
-            createExceptionFile(ex.Message, "SELECT username FROM users")
+            ' Save exception details and the query for debugging
+            CreateExceptionFile(ex.Message, "SELECT username FROM users WHERE kioskid= '" & kioskid & "' ORDER BY username;")
             MessageBox.Show("Error loading users: " & ex.Message, "Database Error", MessageBoxButton.OK, MessageBoxImage.Error)
             Return
         End Try
 
-
         '--------------------------------------------------
         ' 2 - Load global params / min barcode
         '--------------------------------------------------
-        Dim sql As String = ""
         Try
-            ' Single query: global_params + min barcode length
+            ' Single query using UNION ALL
             sql = "
-        SELECT paramkey, paramvalue
-        FROM global_params
-        WHERE paramkey IN (
-            'start.date',
-            'login.title1', 'login.title2', 'kiosk.name', 'company.name',
-            'kiosk.address1', 'kiosk.address2', 'company.vat'
-        );
-
-        SELECT 'min.barcode.length' AS paramkey, MIN(LENGTH(barcode))::text AS paramvalue
-        FROM barcodes;"
+                    SELECT paramkey, paramvalue
+                    FROM global_params
+                    WHERE kioskid = @kioskid 
+                      AND paramkey IN (
+                          'start.date',
+                          'login.title1', 'login.title2', 'kiosk.name', 'company.name',
+                          'kiosk.address1', 'kiosk.address2', 'company.vat'
+                      )
+                    UNION ALL
+                    SELECT 'min.barcode.length' AS paramkey, COALESCE(MIN(LENGTH(barcode))::text, '0') AS paramvalue
+                    FROM barcodes
+                    WHERE kioskid = @kioskid;
+                "
 
             Dim appParams As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
 
@@ -93,6 +97,9 @@ Class MainWindow
                 conn.Open()
 
                 Using cmd As New NpgsqlCommand(sql, conn)
+                    ' Pass kioskid as UUID
+                    cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
+
                     Using reader = cmd.ExecuteReader()
                         While reader.Read()
                             Dim key As String = reader("paramkey").ToString()
@@ -103,7 +110,7 @@ Class MainWindow
                 End Using
             End Using
 
-            ' Map dictionary values to your variables
+            ' Map dictionary values to variables
             If appParams.ContainsKey("start.date") Then
                 startDate = DateTime.ParseExact(appParams("start.date"), "dd/MM/yy", Globalization.CultureInfo.InvariantCulture)
             End If
@@ -117,17 +124,14 @@ Class MainWindow
             COMPANY_VAT = If(appParams.ContainsKey("company.vat"), appParams("company.vat"), "")
             minBarcode = If(appParams.ContainsKey("min.barcode.length"), Convert.ToInt32(appParams("min.barcode.length")), 0)
 
+            lblLoginTitle1.Content = LOGIN_TITLE1
+            lblLoginTitle2.Content = LOGIN_TITLE2
+
         Catch ex As Exception
             CreateExceptionFile(ex.Message, sql)
             MessageBox.Show(ex.Message, "Application Error", MessageBoxButton.OK, MessageBoxImage.Error)
         End Try
-
-
         'isPasswordEncrypted()
-
-        'lblLoginTitle1.Text = LOGIN_TITLE1
-        'lblLoginTitle2.Text = LOGIN_TITLE2
-
     End Sub
 
     Private Sub LstboxUsers_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lstboxUsers.SelectionChanged
@@ -150,11 +154,11 @@ Class MainWindow
         End If
     End Sub
 
-    Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
+    Private Sub BtnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
         Me.Close()
     End Sub
 
-    Private Sub btnLogin_Click(sender As Object, e As RoutedEventArgs) Handles btnLogin.Click
+    Private Sub BtnLogin_Click(sender As Object, e As RoutedEventArgs) Handles btnLogin.Click
 
         username = CStr(lstboxUsers.SelectedValue)
         whois = ""
@@ -172,13 +176,12 @@ Class MainWindow
                     SELECT 1
                     FROM sessions s
                     JOIN users u ON u.uuid = s.user_id
-                    WHERE u.username = @username
+                    WHERE kioskid = @kioskid AND u.username = @username
                       AND s.is_active = TRUE
                 );
             ", conn)
-
+                    cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
                     cmd.Parameters.AddWithValue("@username", username)
-
                     isConnected = CBool(cmd.ExecuteScalar())
                 End Using
             End Using
@@ -211,12 +214,13 @@ Class MainWindow
                     COALESCE(can_edit_products_full, FALSE) AS can_edit_products_full,
                     is_unlock
                 FROM users
-                WHERE username = @username
+                WHERE kioskid= @kioskid AND username = @username
                   AND pass = @pass
             ", conn)
 
                     cmd.Parameters.AddWithValue("@username", username)
                     cmd.Parameters.AddWithValue("@pass", txtBoxPassword.Password)
+                    cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
 
                     Using reader = cmd.ExecuteReader()
                         If reader.Read() Then
@@ -256,34 +260,36 @@ Class MainWindow
                     conn.Open()
 
                     Using cmd As New NpgsqlCommand("
-            INSERT INTO sessions (
-                uuid,
-                login_when,
-                is_active,
-                machine_name,
-                user_id,
-                amountLaxeiaOnLogin
-            )
-            VALUES (
-                gen_random_uuid(),
-                CURRENT_TIMESTAMP,
-                TRUE,
-                @machine,
-                (SELECT uuid FROM users WHERE username = @username),
-                @amount
-            );
-        ", conn)
+                        INSERT INTO sessions (
+                            uuid,
+                            login_when,
+                            is_active,
+                            machine_name,
+                            user_id,
+                            amountLaxeiaOnLogin,
+                            kioskid
+                        )
+                        VALUES (
+                            gen_random_uuid(),
+                            CURRENT_TIMESTAMP,
+                            TRUE,
+                            @machine,
+                            (SELECT uuid FROM users WHERE username = @username),
+                            @amount,
+                            @kioskid
+                        );
+                    ", conn)
 
                         cmd.Parameters.AddWithValue("@machine", computerName)
                         cmd.Parameters.AddWithValue("@username", username)
                         cmd.Parameters.AddWithValue("@amount", amountLaxeia)
-
+                        cmd.Parameters.AddWithValue("@kioskid", kioskid)
                         cmd.ExecuteNonQuery()
                     End Using
                 End Using
 
             Catch ex As Exception
-                createExceptionFile(ex.Message, "INSERT INTO sessions ...")
+                CreateExceptionFile(ex.Message, "INSERT INTO sessions ...")
                 MessageBox.Show("Session insert error: " & ex.Message,
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error)
             End Try

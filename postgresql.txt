@@ -9,21 +9,15 @@ GRANT ALL PRIVILEGES ON DATABASE kiosk TO xdrivel;
 
 user xdrivel/xdrivel
 
-
---sessions 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE sessions (
-    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL,
-	is_active BOOLEAN DEFAULT FALSE,
-    
-    CONSTRAINT fk_user
-        FOREIGN KEY (user_id)
-        REFERENCES users (uuid)
-        ON DELETE CASCADE
+--kiosks
+CREATE TABLE kiosks (
+    kioskid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    description VARCHAR(32)
 );
 
+INSERT INTO kiosks (description) VALUES ('X DRIVE LAKATAMIA');
 
 --users
 CREATE TABLE users (
@@ -39,25 +33,98 @@ CREATE TABLE users (
 	can_edit_products_full BOOLEAN DEFAULT FALSE,    
     created_at TIMESTAMP DEFAULT NOW(),
 	is_unlock BOOLEAN DEFAULT FALSE,
-    is_active BOOLEAN DEFAULT TRUE
+    is_active BOOLEAN DEFAULT TRUE,
+	kioskid UUID NOT NULL,
+	
+	FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
-
 
 INSERT INTO users (
     username, fullname, phone, id_num, pass,
-    is_admin, can_view_reports, can_edit_products, can_edit_products_full
+    is_admin, can_view_reports, can_edit_products, can_edit_products_full, kioskid
 ) VALUES (
     'christos', 'Christos Ploutarchou', '+357-99-518802', 'ID123456', '123',
-    TRUE, TRUE, TRUE, FALSE
+    TRUE, TRUE, TRUE, FALSE, '41bb87b1-f185-4468-a810-432c1477a96a'
 );
 
 INSERT INTO users (
     username, fullname, phone, id_num, pass,
-    is_admin, can_view_reports, can_edit_products, can_edit_products_full, is_unlock
+    is_admin, can_view_reports, can_edit_products, can_edit_products_full, is_unlock, kioskid
 ) VALUES (
     'unlock', 'unlock', '0', '0', '123',
-    TRUE, TRUE, TRUE, FALSE, TRUE
+    TRUE, TRUE, TRUE, FALSE, TRUE, '41bb87b1-f185-4468-a810-432c1477a96a'
 );
+
+CREATE INDEX ON users(kioskid);
+
+--global_params
+CREATE TABLE global_params (
+
+	paramkey VARCHAR(32),
+	paramvalue VARCHAR(40),
+	kioskid UUID NOT NULL,
+	
+	FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.poura','19','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.gkazi','5','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.grafiki.ili','19','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.laxeia','0','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.efimerides','5','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.periodika','5','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.stavrolexa','5','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.chino','5','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('init.fiscal.amt','700','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('amount.laxeia','0','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('vat.icecream','5','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('export.path','C:\\','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('all.pass.encrypted','1','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('start.date','07/04/23','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('login.title1','PERIPTERO','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('login.title2','     Strovolou18,Tseri','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('kiosk.name','PERIPTERO TSERI','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('company.name','G.S AMIANTITIS TRADING LTD','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('kiosk.address1',' ','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('kiosk.address2',' ','41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into global_params (paramkey,paramvalue,kioskid) values ('company.vat','V.A.T 10356677F T.I.C 99641818','41bb87b1-f185-4468-a810-432c1477a96a');
+
+
+--barcodes
+CREATE TABLE barcodes (
+    barcode VARCHAR(32),
+    product_serno NUMERIC(10, 0),
+    kioskid UUID NOT NULL,
+
+    FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE INDEX ON barcodes(kioskid);
+
+--sessions 
+CREATE TABLE sessions (
+    uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL,
+	is_active BOOLEAN DEFAULT FALSE,
+    
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id)
+        REFERENCES users (uuid)
+        ON DELETE CASCADE
+);
+
+    
+
+
 
 -------------------------------------------------------------------------
 

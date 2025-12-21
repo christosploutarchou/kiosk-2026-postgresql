@@ -10,6 +10,7 @@ Module GlobalModule
     Public currentUser As User
     Public dualMonitor As Boolean = False
     Public computerName As String
+    Public kioskid As String
     Public divideFactor0 As Double = 1
     Public divideFactor3 As Double = 1
     Public divideFactor5 As Double = 1
@@ -34,10 +35,10 @@ Module GlobalModule
     Public COMPANY_VAT As String = ""
 
 
-    Public Function getAmountLaxeia() As Double
+    Public Function GetAmountLaxeia() As Double
         Dim sql As String =
             "SELECT COALESCE(SUM(sell_amt * avail_quantity), 0) " &
-            "FROM lottery l " &
+            "FROM lottery l WHERE kioskid='" + kioskid + "' " &
             "JOIN barcodes b ON b.barcode = l.barcode " &
             "JOIN products p ON p.serno = b.product_serno;"
 
@@ -90,8 +91,8 @@ Module GlobalModule
         End Try
     End Sub
 
-    Public Sub getMinBarcodeLength()
-        Dim sql As String = "SELECT COALESCE(MIN(LENGTH(barcode)), 9999999) FROM barcodes;"
+    Public Sub GetMinBarcodeLength()
+        Dim sql As String = "SELECT COALESCE(MIN(LENGTH(barcode)), 9999999) FROM barcodes WHERE kioskid='" + kioskid + "';"
         Try
             Using conn = PostgresConnection.GetConnection()
                 conn.Open()
@@ -102,7 +103,7 @@ Module GlobalModule
                 End Using
             End Using
         Catch ex As Exception
-            createExceptionFile(ex.Message, sql)
+            CreateExceptionFile(ex.Message, sql)
             MessageBox.Show(ex.Message, "Application Error", MessageBoxButton.OK, MessageBoxImage.Error)
         End Try
     End Sub
