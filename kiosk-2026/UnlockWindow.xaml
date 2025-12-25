@@ -1,12 +1,15 @@
-﻿<Window x:Class="UnlockWindow"
+﻿<Window x:Name="___No_Name_" x:Class="UnlockWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kiosk_2026"
         mc:Ignorable="d"
-        Title="Unlock User" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="Hello WPF Window!" />
-    </Grid>
+        Title="Unlock User" Height="345" Width="545" ResizeMode="NoResize" Background="#FFD4D0C8">
+    <Canvas Height="NaN" Margin="10,17,456,254">
+        <ListBox x:Name="lstboxLockedUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFE1C0" FontFamily="Segoe UI Semibold" FontSize="20" Height="269" HorizontalAlignment="Center" VerticalAlignment="Top" Width="285"/>
+        <Button x:Name="btnUnlock" Content="Unlock User" Canvas.Left="326" Canvas.Top="6" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button x:Name="btnExit" Content="Exit" Canvas.Left="326" Canvas.Top="215" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    </Canvas>
+
 </Window>

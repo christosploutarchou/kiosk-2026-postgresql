@@ -95,6 +95,18 @@ Insert into global_params (paramkey,paramvalue,kioskid) values ('kiosk.address1'
 Insert into global_params (paramkey,paramvalue,kioskid) values ('kiosk.address2',' ','41bb87b1-f185-4468-a810-432c1477a96a');
 Insert into global_params (paramkey,paramvalue,kioskid) values ('company.vat','V.A.T 10356677F T.I.C 99641818','41bb87b1-f185-4468-a810-432c1477a96a');
 
+--lottery
+CREATE TABLE lottery (
+	barcode VARCHAR(12)
+   );
+
+Insert into lottery (barcode) values ('LOT2EURO');
+Insert into lottery (barcode) values ('LOT3EURO');
+Insert into lottery (barcode) values ('LOT1EURO');
+Insert into lottery (barcode) values ('LOT5EURO');
+Insert into lottery (barcode) values ('LOT10EURO');
+
+
 
 --barcodes
 CREATE TABLE barcodes (
@@ -110,23 +122,505 @@ CREATE TABLE barcodes (
 
 CREATE INDEX ON barcodes(kioskid);
 
+--vattypes
+ CREATE TABLE vat_types 
+ (	
+	uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+	description VARCHAR(32), 
+	vat NUMERIC(3,0)
+   ) ;
+
+Insert into vat_types (uuid,description,vat) values ('C70174D7F6174801AF938DC0B81F1583','V.A.T 0%',0);
+Insert into vat_types (uuid,description,vat) values ('A861F23562D54C4EBCFD87F7BC5CD7DB','V.A.T 3%',3);
+Insert into vat_types (uuid,description,vat) values ('4B729760D22E48FE898DEAE151A10BCA','V.A.T 5%',5);
+Insert into vat_types (uuid,description,vat) values ('ABCCF474409F41C9BC827D2CD164C922','V.A.T 19%',19);
+
+--categories
+CREATE TABLE categories (
+	uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+	description VARCHAR(32), 
+	vat Numeric(3,0), 
+	kioskid UUID NOT NULL, 
+    
+	FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+   ) ;
+ 
+CREATE INDEX ON categories(kioskid);
+
+Insert into categories (uuid,description,vat,kioskid) values ('3C5ABF56998543F8854C38E911B42981','Tsigara',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('946721DE0F1E4B74A10F8672AD6FA0A5','V.A.T 19%',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('F93373D893E947A0ADF6939E863EE290','V.A.T 5%',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('4ABA8F3B5ED3497A8C169C493E807C35','Poura',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('7D3DB29E237F4DB28DE756666A67541D','Tsantes Doron',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('4CD2993B515F418A80B168CED3E0EA1D','Kalokerina',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('DA2CB73D4DE44B79989138E1641308D2','Ximoniatika',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('B668DDDC19B643F3853610B2571FE149','Pasxalina',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('29B0FC858A074E00B44E777C441C4764','Ag.Valentinou',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('736D68895A0B4BBBA6F437BED6ACD2E9','KATEPSIGMENA ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('C23782C7C3AF4A33BFE4EF06B17C7096','ALKOOL',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('6C08C937A8AC4FEEA6C12B5BD3D8D45C','PAGOTA ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('C546613204224C95B013D4CB94C6DBF1','TROFIMA ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('23AAA54DD10945E4A871EAA308CBACD1','GRAFIKI YLI',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('06A703C546444247B09392CC1CB623D2','SWEETS',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('03FFB51F31CC4DF7B45717765B23407A','CHIPS',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('1ADA3AD25CCA4716B1A0AB6B4E86626B','CHOCOLATES ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('016388F2574E4615A1CB2CE9540B2F4F','LIFEPHARMA ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('14E6C5CD678A4292BE7FEC64D9966A01','PERFUME ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('164CEE0469E944298743D75AFB358A2E','KATHARISTIKA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('D47CBFB0ABF74E14A8F7C7EE8C3CEFCB','PAIXNIDIA ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('7CAB93AB5AB94881A228728F018A2264','kounes/nuts',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('8468436288AB4079805568FF25AC5423','ALANTIKA',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('D446638DFA514310A54BA1A783131D34','psigeio 5%',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('B88625B6EDC94908A619A1E4487963B6','psigeio 19%',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('CE72B1B592F84884888CCA86229F1549','NERA',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('BFA9AB5A87094477A3BA5EAF5042FF8A','BATTERIES',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('C16C7ECC44B94FCCB69815E09A732550','ANAPTIRES',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('DF66BD1160D147F2A45545C8E525479B','DUREX',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('35488F9A6EE64985A6CFFBC67FDDB1B1','FORTISTES ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('9AF40A5CC06B4BA78B46DFD7BE05D0A7','GREETING CARDS ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('96BE73AE99894B708BDA8344FECE6BF8','PSOMI',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('A64DFF5FB2A04A47B311E181DB997F9F','CROISSANT',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('41500237366A4D1B83586229036A8870','BISCUITS',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('03702813D537440E9C05C3150D07FF8D','LAXEIA',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('E3113E5B8DCE460CA5FF67F8352A9BB3','vape',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('A167432AFA954C5FBAFC1CCFED91E285','ANAPSIKTIKA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('6D042A07B5A34D23B31956FD2020D017','cornflakes',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('90C1966DF489455E8FE9C1888FF01BC7','Coctails',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('6CD27E7C0FF94DECAA7E9CCEFE77F55F','KAPNIKA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('55C7836AFAF84D078BE01E4D0D05A347','Paksimadia ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('BDDF4C96EE1948BDB727D9C01F168FEC','ENERGY DRINK',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('4CCA2400C4C64775A35FDC2875D358CA','XYMOI',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('D25EA86251A14CF1A1EE5DFB7362F38E','PISSES',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('00688A3719F34B59AAB6CC8B34DDF8AF','Moromantila',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('145D9FD9549D4E08AC9558838DED68BE','katharistika',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('6D476F92D0254609AB4C38175A351B17','kouzinika',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('78345D12AD8A480393D1EC654B97E5B7','Milk',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('9D3E99DEF4804422A19687F55B81CABF','EIDI YGIEINIS',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('3254080D79434D0CB9C716A650FECEB1','sapounia',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('35229C34668348D49D1811F0F7C30EB6','balonia',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('A2794ED953A94A138AF71F62B3E04DFE','coffees ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('D81E899977C34B08B50D46A302DF0724','BIRA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('5972752E7FFB491B8F6DA8267B92ABF3','PAPOUTSIA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('A11EC850E9164D3386041498EE2C0715','PYROTEXNIMATA ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('86B6300BFABF443BBB9CDE7E0C031F5F','KERAKIA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('469CEFD0C0824107A0469FD2D33C4236','colgate',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('504CB31371D14B65A5D8662608AFC439','cotton ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('E71905AA9192406988BCE7A343A1E4F1','pet food',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('AAAC5B266D2E49DABD33914ACC283323','LAMPES',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('73C927C87A7A48E6A798DF2F80EBB88E','EFIMERIDES',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('63D91FCA7E144ECDBFBF8B61ECFC2B09','PAYSAFE FEES',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('DA3CF24C99A249A887BEE6C65D27B5BE','PROTEIN BARS',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('DED9A8DB2A154077B37B2288F7DFDCC0','KARVOUNA',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('EC7DD51DF6E743C48E085F5ADC29809D','KARVOUNA ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('C6DDD9A69BC240369AB4F0B69617190F','PAGOS ',5,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into categories (uuid,description,vat,kioskid) values ('89C40F0FD38C4CE79F65EC8CBB7BB9B6','TSANTES SXOLIKES ',19,'41bb87b1-f185-4468-a810-432c1477a96a');
+
+
+--suppliers
+  CREATE table suppliers
+   (
+	uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+	s_name varchar(32), 
+	phone_1 varchar(32), 
+	phone_2 varchar(32), 
+	email varchar(32), 
+	contact_name varchar(32), 
+	mon Numeric(1,0), 
+	tue Numeric(1,0), 
+	wed Numeric(1,0), 
+	thu Numeric(1,0), 
+	fri Numeric(1,0), 
+	notes varchar(4000), 
+	web Numeric(1,0), 
+	isdefault Numeric(1,0), 
+	kioskid uuid not null, 
+    
+	FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+ 
+   ) ;
+ CREATE INDEX ON suppliers(kioskid);
+ 
+ Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('2EBDBE16A7F34F6E958EBD799FB0B6FA','MARIA PAKSIMADIA ','5',' ',' ','X',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('812DDFE2532C42B0908B925B98DAB7C0','GREGORIOU ','7',' ',' ','ANDREAS ',0,0,0,1,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('535BCCF7D5BF479EAA10FC09E3515F8C','FUMO ANATOMY SHISHA','99976674',' ',' ','ANDREAS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('B2E80486251A4E78BD2A7BD13B92B093','CHRYSILENA','96860498',' ',' ','ANDRI',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F0DD736063D54D90A1B10BF5CC11F69F','MONOLITH','99',' ',' ','A',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('4D2CB02AD54C4C178E8F31B5A875EB46','MASTER COFE`','99',' ',' ','P',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E5452B15A1404830A5F0D1D0F1985FCC','ALAMBRA','96700108','99132739',' ','MIKIS',0,0,0,1,0,'30% discount ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('1DB5F053EF524259BECBEDC8B265C72C','MIROIN PARADOSIAKA','99292931',' ',' ','MARINOS ',1,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D5AF439791BB4908829711C5D593B883','karpasitis ','99680894',' ',' ','giorgos ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('43532299FEF3489CB99BD4463046B2B4','MITSIDES ','99746088',' ',' ','Alexis ',0,0,0,0,0,'15% discount ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('B04D69A48FB24B688E7988B9D2E075CA','kean food link','99630968',' ',' ','takis oikonomidis ',0,0,0,1,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('26E8D59F12014BB8BDF9A303976C1F7A','PATHIN','96020101',' ',' ','KONSTANTINA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('083D9117268B4E2F9DA4F7001A79C597','BARGEN ','9',' ',' ','x',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('1C83F4ADBD054F9B9F3D80E588D8BC63','TGH FOOD AND DRINKS ','96457331',' ',' ','HAIG',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('2187E5B70B834B80A9929D05D59F6E0D','KNS ANASTASIOU LTD','99351720',' ',' ','MARIA ',1,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('162553C21CFB4995B0EB6C510624762D','D.A. LATEX LTD ','22485258',' ',' ','-',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('21DDFD4C1C0E47EC881F2E33D35B7EF1','RUBY','99','99',' ','-',0,0,0,0,0,'KINEZIKA ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('FA9257382DDC4EB9B2E2F7504D5F3275','xinaris ','99322015',' ',' ','GIORGOS',0,0,0,1,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('72A15ACFF95A47A3B9517192D1F851FC','HARCO','99549687',' ',' ','stavros stavrou ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('FE325878C7604044B003DFB90BE33DFA','mintikis ','96359349',' ',' ','kiriakos',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('CE88B01ABF574422A67C82E17BBDAD21','COYIO','96462887',' ',' ','IORDANIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('61D6FBF5D61D4579888D62F823538863','KCC TRADING LTD','99838171',' ',' ','GEORGIA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('46B19034B4364808A2CEA989AEB338E6','HARTZIOTIS TRADIND CO LTD','99598570',' ',' ','-',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C33E19CD778F476EA1056462F571453A','A&O BAKERIES LTD','99627858','22823215',' ','ANNA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('9C92FCD811B447B79F6F3AA27475F64E','VIOFOODS LTD ','97668606',' ',' ','GIORGOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('B273CE5EC9A241E5A7C037EB4466D5F4','MAXOS','99192929',' ',' ','MAXOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DD868FD2C0FD4B119C14D353B5696A2F','PETROEMPORIKI','99652441',' ',' ','XRISTOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DB0B1DE3E1064E14B3B9B900F9BBAD56','MICHAEL CONTOPOULOS LTD','22433545','99882383',' ','STELIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A6F9637BACA240939B493740C5FD0979','CAMELOT','6936845956',' ','ioanniskomaris@mak-zach.gr','IOANNIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('AB25E2D9C39D4B3EAA2DAA2D49445D5F','AVGOUSTINOS AVGOUSTINOU','99999','9999999','-','AVGOUSTINOS ',0,1,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A70D32E5E1AF40A58434101FE6C20E29','VASILIS WARGAMING','99',' ',' ','VASILIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('EEE058B61912438D9F8A652B544CFEB1','N&L GEORGIOU ','99650249',' ',' ','NICOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('7FAA065F8BE444568A6B31D69172B146','ANMATO ','99408633',' ',' ','KOSTAS',0,0,0,0,0,'MUST HAVE 10% DISCOUNT ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('748296892C994521906E445853921F8F','FEREOS TOBACCO','96374237','99779299',' ','ANTREAS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DC3A07BB1E1E47C5B2257BEB35A8D439','CASSANDRA TOBACCO','99842975','96494504',' ','EROTOKRITOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('9BE8DCDCBC2848EF8BC883FAFFF24BE3','COSMOS TOBACCO','96555902','99740591',' ','NASOS SAVVA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('6480CF135D26400F82021A4B10FFE153','FEREOS POURA ','99374932',' ',' ','DIMOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('7DED51A1A37542C59125EA4B59494E49','LOUNIC ','96428827',' ',' ','Mr. Andreas ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('9AD29CBE8E1D4540941B7D2CBD4C6CEF','LAIKO COSMOS','99698410','99677281',' ','DEMETRIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E0205F546CCC41079C7F21C4B09B7EEC','C.M. LONDOU ','99389092',' ',' ','Aggelos ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F040C27F3AF6481F9BBFF47B42CA6F56','PARTY ICE ','99606892',' ',' ','Mr. Andreas ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A709339739AC4D0F99A5195203CC6B37','UDC SPIRITS ','99623242',' ',' ','SPYROS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C72EE16D3E5F41BE89DFACB3014B78DD','FRESH SNACK ','52514',' ',' ','AGATHOKLEOUS ',0,0,0,0,0,'MUST HAVE 15% DISCOUNT ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('7ABE18FDBF8744DDBBC4560D1BE9B8D6','SHISHA LOVE ','99877007',' ',' ','SAVVAS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C216DFF9A63E4373B849179F0D03A17F','KATSAFADOS ','99428613',' ',' ','STELIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('BDAA1F7F5E654D538798B135E37AF9BC','C.P. ANTONIOU (HARIBO)','24652758','99652370',' ','ANDRI',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F5A57CB6475447088E5456D0FE362E34','THREE BAKERS ','99846148',' ',' ','GIANNHS',0,0,0,0,0,'10+1FREE ALWAYS',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E6F547018539409D9EB4C76A7E5A7339','AIS IOANNOU','99877803',' ',' ','ANDRIA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('EBF4445E913C4019BA7CA8E6C81975BA','PAKOZAN ','99460796',' ',' ','STAVROS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('7D08BFDB7E0347D99886710D12965836','SERANO','96241669','97617500',' ',' ',0,0,0,1,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('549F95DF561449D5BBFB77BEDD2FEE79','DEFAULT SUPPLIER',null,null,null,null,null,null,null,null,null,null,null,1,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A0B42684F31F4FD6B8248D2F569FB0DA','5H ON TIME ARIZONA ','97753740',' ',' ','GIORGOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('82FDBF5A987E49F1A0426B047314F23E','GHALANOS ','99670233',' ',' ','GIORGOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('2F7757EDBEBC45CA9C26309E1B2DF08E','ACM CHRISTOFIDES ','99402273',' ',' ','MIXALHS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F5A0333967754B7384DBA5C958EEF9B1','TOMAZOU ','99408309',' ',' ','TOMAZOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('262F171F59C74D42B03D26645FF05ED9','L. Zotiades (mr. brown)','99489183',' ',' ','Giorgos',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('CBCE5D2A2C034CAD93948A5C48DC1906','DPD','96658443',' ',' ','stavros ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('CAF80B49E3AF4DB3957CA201E0BAB8AC','KEO','99609182',' ',' ','KOULLIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('B6467B05FE224825A8B29F12BBDF388E','PHOTOS PHOTIADES ','99448344',' ',' ','MARIA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F7574FCB40D3478590DBA0B43CDAC7B1','ARGOSY ','99487126',' ',' ','GIORGOS',0,0,1,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('973C3302A4C24F008AF694A35CCB762C','ANDRIKIAN','99780185','99485443',' ','GIANNOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('6591D345C9E94FAFB4F2760844CE28B6','EVANS LTD','5555',' ',' ','55555',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E68CEC000E3E422197BF1C9653A0E09A','IQ NOMMO','999',' ',' ','X',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('3CF6CCA41B9E4BD58AAC6DAB222C08C7','KERAKIA KAI PYROTEXNIMATA','99635279',' ',' ','ANDREAS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('06A90F96ACDA4945B3879263D847A4A9','MIHALCO ','99451931',' ',' ','GIORGOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('9B11B8BB24194520A140ED802DFB3230','SKLAVENITIS','2222',' ',' ','GRAFEIO',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('0AFA19EC374C4583B77D556E4CECA29F','SERAPHIM','99444226',' ',' ','SOKRATIS ',0,0,0,0,1,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('42C65F8FD75D435B94C6011096A7CE6C','VASOS ELIADES ','96397020','99068855',' ','SOKRATIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('EEB294A283644AE1A6F02C1A79DF5156','GIANNHS AGATHOU ','99',' ',' ','AGATHOU',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('205D01CAFF75473C97BA8041F88B108F','HEROVA ','99347639',' ',' ','IRODOTOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C89CE852334E4C5883F3237366BD0D11','GHG HADJIGRIGORIOU ','99256621',' ',' ','XRISTOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('AEAA10231F184CAD9B703C40686382B6','CAVA WAY ','99',' ',' ','STAVROS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('6C0A2CADBFE04E02A18E7671B80E1140','EAT SOME MORE ','99',' ',' ','GIANNOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('BA8F1213401142A6AFAEB3245F6D51BB','HANDY SNACKS LTD','99547686',' ',' ','PANTELIS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('2B880CCADFFF455A8A88B292807FCB4A','FROU FROU ','77',' ',' ','X',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DB73557BF8154FAF997D679F40ADD1C9','HELL','99720682',' ',' ','ANDYS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F2B6D7D61D2F4896B4754F6CC9BA0FE9','COCA COLA','97710088',' ',' ','STELIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('2398E9D504F3494BAE2FB3379F4BFF37','GIORGOS LAXEIA','99579464',' ',' ','K.GIORGOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('45D0B62AA37C4AD2BC0397EEF480AA94','EFIMERIDES','22',' ',' ','ANNA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('1352E7DCD4D047F980730CC0F5950B5B','TEMPO','95508561',' ',' ','ORINA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('ED4476AC7CB0421C9CF1EB80671645B0','CORINA LAYS ','99670175',' ',' ','stelios',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C78AC246677044C28049478432E24871','farmakas ','99472972','22498150',' ','vasos',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('156C78EF783C4688A95DF5C3F546869E','thessaloniki','55',' ',' ','x',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DBCEFD604B024428A3CC804E268FB489','forever 21','88',' ',' ','x',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('6FF3ED5ED9EE492C890BB7C5BB66932D','ed sport','444',' ',' ','f',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('CB13278820024BDB81C2F86E513A33F7','far east food','99',' ',' ','hh',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('91362EA40B804030A7051C7B1F8CF164','alamanos ','99943051',' ',' ','periklis',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('BB117A174F82473EB56A4976A1C14D99','rafee brothers','44',' ',' ','x',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('99D44F2A705E423B8C2FD673CCBA8DD1','CHARALAMBIDES','96896928','96316063',' ','MARIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('4D2B54FC002F49AA9E4B1BCB3DCD5E24','LANITIS ','99972072',' ',' ','NIKOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('EBF6D5B87ACF40A190AE02915BDE6A1B','SURE FOOD','77',' ',' ','F',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('5324880B84EE4CC1919BBB6EA6F687AA','KYPROPHARM','99435530',' ',' ','MARIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('761ED29D220F4A27B19565739C605D2C','ASVESTAS ','22664818',' ',' ','ELENA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('133EFE16B9B4476FAB7E44718CEAB9A5','KRONOS ACCESORIES ','99',' ',' ','MARIA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('042FC29E0265416BA6F53C37D99BF006','STEFAN','22383349',' ',' ','GRAFEIO',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('23E1D9B841074BC6A1B4AECA72F4EBFC','AXNAGAL ','99654064',' ',' ','XRISTOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('3562E8470FAD4CFBA0D366B4712BCE4F','HAAGEN DAZS ','99550650',' ',' ','KONSTANTINOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('896C0C1757F340E0866BB71EC7A480AB','KYPRIANOU SPECIAL FOOD ','99675897',' ',' ','MARIOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A1C95D13E8724E69B6B0C980AEF79516','HOME WAYS ','99894731',' ',' ','GIANNAKIS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('64844C01AF52499D8ED52732D1DC8155','THEOTOKIS','22',' ',' ','MAKARIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('2AD81C1F71B14E7D82E700823A0BA6FC','G.X STAVROU','66',' ',' ','XRISTOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('5098DE87F5DC4464A07B0708995E5020','CANNABIS ','99',' ',' ','ZINONAS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('4EAA7584C86E4FB2B3FC85402D479819','IPH STARBUCKS ','99472490','96571496',' ','LOUKAS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('9911BF1531B3462C91412A98AA65727F','PAPAELLINAS','99012278',' ',' ','V',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('6AD090D41FBD4C11B078E29955852A5A','VASILIOU','96599333',' ',' ','Maria',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('7FF8D7A463F64C00A629599C476C482D','EL CORO ','5',' ',' ','GT',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E2F18198E23F410789B0438579BCC1DF','SENAGA','5',' ',' ','DD',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D1E65C6589014900A46CADCAD90E2D21','TOTAL CARE','96684792',' ',' ','MARIA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('BA909F36E482483CAEA582F06FC684AF','lumi sale','77',' ',' ','marIA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C98C5200D6AC4C3686F612DD9853DAE1','JUNIOR ','445',' ',' ','R',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('ECA97D5A88894D619AA7FFD4DAA365A3','CONSTANTINIDES','96226724',' ',' ','GIANNA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D0C13E1442374719A6F0FACB0BAA5F83','LIFEPHARMA ','99859745',' ',' ','GG',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A5611B0A735B4542AB7C77AA78F6780B','ATHIENITIS ','99410962',' ',' ','K GIORGOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('512CA4D52F3A49F0B96BC0FD1FE2F1F7','ALMYRO GLYKO','4',' ',' ','GG',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('8802EEB579B94D75BD630B389796910D','HARMANAS ','99493197',' ',' ','A',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('11ECC2284B424618A952366722999565','XARALAMPOUS ','99316476',' ',' ','SAVVAS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('4C0EBF4C4FEF43F59E2D6512F4870D0F','VOUROS ','4',' ',' ','ANTONIS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A44C754926C643238793F49F4EBFCD94','PAPAFILIPPOU','99650931',' ',' ','AGGELOS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C7F6F6AD61ED4015BE44F8E78BF24F7C','REGIS ','44',' ',' ','DD',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D63075FFDE2A4BF3AFBE62B94B604B98','KITTIRAS','1',' ',' ','MARIOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D974C9C59F554179B468DB66A0749458','WELLSPRING','96389345',' ',' ','xriso',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('212FF5D7A4B2486BA7322794ABBF82AA','STAVROS STAVROU','99',' ',' ','FGF',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('B7ADAD42FC4E460780AE5D88FEDF8D1E','Royal IVG ','99957942',' ',' ','XRISTOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('B685C7F1898343E791A3627893C6A29B','PGA HOLDINGS ','99655',' ',' ','RUGY',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('3A6DD3C7C0034CB9B23A1D71AEA89330','SPARTAKOS','0',' ',' ','giorgos',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('F5FF21DBF0D64E14AB16A2BC6237E221','MILORDIS ','232',' ',' ','GIKK',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D4AE796ADFC24EE0A9D93C92F46EA899','cashmaster ','96584064',' ',' ','ghsd',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E24ABCEAFCBA48929DF10F922F77DE3E','boston deli ','96667153','96757112',' ','gyfy',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A72C792B5883463E907C8B2179AAFEDE','AFRIKANOS EMPORIUM LTD','99762082','0','0','MIXALIS',0,1,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('3D10E8FB9C3F4E21BC93DFEEE2607A5E','sotiris sotiriou ','4152',' ',' ','hjghj',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('EB672D2107D3443887FC03F7890D3C95','MERSINI','97753324',' ',' ','KJHI',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('EA08A2F7406F4E1183D48C449401AC08','KTIMA VASSILIADES ','45',' ',' ','SD',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('09B01E382E91457E9F0BB4F40E7BC6A7','Marios tapes ','96550835',' ',' ','Marios ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('436BD4B1D48841508E1B5C5235A51D45','A&N PRATSOS ','99088018','99698275',' ','MARIA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('685A0F78B3094CE6A1EB60DAFD41BB79','AC ISERVICE VIP ','1445',' ',' ','GFNJ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('E209A947181746D183BBA78999A9A13C','DESDAR ','97785733',' ',' ','MANOLIS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C8A8AE2BADCA45D4A47C0158105EE41A','KOURAS KARVOUNA ','99614556',' ',' ','MUXTARIS GIANNIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('916D7FDEEF9D405DA379735AC33323B4','Onirous karvouna','99598238',' ',' ','nikolas',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('070000A291A3483AA6470F152E62AE0C','Charilaou Bros ltd','96195435',' ',' ','Marios',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('4BDB2C6AB2F846BFAC0CAB5BB9F7FBBE','Leaderbrands Co','25812943',' ',' ','despo',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('5E9796478E1247A2B678CF5FC16DD5B8','Carnation Spices','99863267',' ',' ','andreas',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('D11D075699D44A5AA569BAF5E65B0F13','KRONOS EFIMERIDES','135635',' ','-','GKA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('9B55CE2994CA4487A9D4C6A6EBEE7E92','G.X. XRISTOU','99',' ',' ','XRISTOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('638D80B53180448CBC2FEE421B33F87A','KERLENGOY','96269790',' ',' ','STAMATIS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A3062660187F48CAB55D95DDDDC0D552','AQUA WATER ','99768636','96433007',' ','ANTRIA ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('546FB46085F74B729961B26EF6597AC3','MAKNO FARM ','99599419','99488491',' ','KOSTAS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('18DFDF88CEED49B8B9B39611B21F786E','PETROS PETROU PP','0','0',' ','PETROS ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('976D1AA77E204B23BD8F6F5E0585884E','MIZOO ','30',' ',' ','LORENZO',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('A0892BB99C0E418C88BA1610C3A741D2','ARAPATZIS ','9999',' ',' ','FU',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DC9206AA39204433BFF8E9C9A48E2A98','SIMPLY LUNCH BOX','22441055',' ',' ','G',0,0,1,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('ADCD23F61A394A60AF17D869682AF008','TRADESOR','0030',' ',' ','vasilis ',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('FF1448EB76D24A919D8469F1B9E07226','EYSTATHIOS  STYLIANOY','99',' ',' ','G',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('318F722513CE4CF98C6EEAF7650A54F3','chrysodalia','55',' ',' ','andreas',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('007F0A2C9BC04827BA109748B777BF02','E.PIRGA','96292569',' ',' ','stelios',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('08280EF5A93840A189DF517C2B78B53F','TOPTOWN ','99',' ',' ','AA',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DC0119833A5F485CA97744C7CAC2B1AB','NIKYR PRODUCTS','0','0','0','VALENTIN',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('88F39727EAA44E679E891F71FA10AA15','ALWAYSFRESH','99',' ',' ','B D',0,1,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('FCDC02EAFF654825BB84BA4B84536840','MAROYLLA TOMPAZOY','99',' ',' ','A',1,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('67347C6ED16942128A12EC5A3A393750','PETCO MANUFACTURING VOOM','99469628',' ',' ','GIANNOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('0451BB64B06C46A49D0BFD66867E4E78','FARM N.B. SHIKKIS','9',' ',' ','A',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('C45FC71E81324AE5B002FE6E523C5733','K.P&N.C VAPEPRO','456',' ',' ','SF',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('DB23048DCD7841AFA1176C9333289DE1','Bio Sun','99',' ',' ','a',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('AABA13BF6C2745C1AC437AF9CEB64BC3','CONSTANTINOS CHRISTODOULOU','99',' ',' ','C',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('ED8AAE66594A470BAA42416C21323563','ALGIDA Unilever','96883329',' ',' ','a',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+Insert into suppliers (uuid,s_name,phone_1,phone_2,email,contact_name,mon,tue,wed,thu,fri,notes,web,isdefault,kioskid) values ('581479F095174E48A6EB26A44BAC227F','CAVALAND','96616164',' ',' ','GIORGOS',0,0,0,0,0,' ',null,null,'41bb87b1-f185-4468-a810-432c1477a96a');
+
+--products
+CREATE TABLE products (
+    serno NUMERIC(10,0) PRIMARY KEY,
+    description VARCHAR(32),
+    min_quantity NUMERIC(5,0),
+    avail_quantity NUMERIC(5,0) NOT NULL,
+    alert_on_min NUMERIC(1,0),
+    expiry_date DATE,
+    alert_on_expiry NUMERIC(1,0),
+    alert_date DATE,
+    buy_amt NUMERIC(10,2),
+    sell_amt NUMERIC(10,2),
+    category_id UUID,
+    supplier_id UUID,
+    notes VARCHAR(100),
+    stock_quantity NUMERIC(4,0),
+    profit_percent NUMERIC(10,2),
+    amt_profit NUMERIC(10,2),
+    offer NUMERIC(1,0),
+    offer_type NUMERIC(1,0),
+    offer_x NUMERIC(4,0),
+    offer_y NUMERIC(4,0),
+    offer_disc NUMERIC(4,2),
+    offer_at NUMERIC(4,0),
+    lastmodifiedby VARCHAR(32),
+    lastmodifiedscreen NUMERIC(1,0),
+    vattype_id UUID,
+    isbox NUMERIC(1,0),
+    box_qnt NUMERIC(4,0),
+    offerfromdate DATE,
+    offertodate DATE,
+    buy_amt_no_vat NUMERIC(10,3),
+    buy_amt_new NUMERIC(10,3),
+    kioskid UUID NOT NULL,
+
+    CONSTRAINT fk_products_kiosk
+        FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT fk_products_vat
+        FOREIGN KEY (vattype_id)
+        REFERENCES vat_types(uuid),
+
+    CONSTRAINT fk_products_category
+        FOREIGN KEY (category_id)
+        REFERENCES categories(uuid),
+
+    CONSTRAINT fk_products_supplier
+        FOREIGN KEY (supplier_id)
+        REFERENCES suppliers(uuid)
+);
+
 --sessions 
+-- Required once per database
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE sessions (
     uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL,
-	is_active BOOLEAN DEFAULT FALSE,
-    
-    CONSTRAINT fk_user
+    is_active BOOLEAN DEFAULT FALSE,
+    login_when TIMESTAMP,
+    machine_name VARCHAR(32),
+    user_id UUID,
+    logout_when TIMESTAMP,
+    amountlaxeiaonlogin NUMERIC(10,2),
+    kioskid UUID NOT NULL,
+
+    CONSTRAINT fk_sessions_kiosk
+        FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT fk_sessions_user
         FOREIGN KEY (user_id)
-        REFERENCES users (uuid)
+        REFERENCES users(uuid)
         ON DELETE CASCADE
 );
 
-    
-
-
+CREATE INDEX idx_sessions_user_login_when
+    ON sessions(user_id, login_when);
 
 -------------------------------------------------------------------------
+
+--receipts
+CREATE TABLE receipts (
+    serno               NUMERIC(10,0) PRIMARY KEY,
+    payment_type        CHAR(1),
+    total_discount      NUMERIC(10,2),
+    total_vat19         NUMERIC(10,2),
+    total_vat5          NUMERIC(10,2),
+    return_amt          NUMERIC(10,2),
+    total_amt_with_disc NUMERIC(10,2),
+    total_amt           NUMERIC(10,2),
+    payment_amt         NUMERIC(10,2),
+    created_on          TIMESTAMP(6),
+    created_by          UUID,
+    total_vat0          NUMERIC(10,2),
+    total_vat3          NUMERIC(10,2),
+    kioskid             UUID NOT NULL,
+
+    CONSTRAINT fk_receipts
+        FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT fk_receipts_created_by
+        FOREIGN KEY (created_by)
+        REFERENCES users(uuid)
+);
+
+CREATE INDEX rec_created_by
+    ON receipts (created_by);
+
+CREATE INDEX rec_created_on
+    ON receipts (created_on);
+
+--receipts_det
+CREATE TABLE receipts_det (
+    receipt_serno    NUMERIC(10,0),
+    product_serno    NUMERIC(10,0),
+    quantity         NUMERIC(4,0),
+    created_on       TIMESTAMP(6),
+    amount           NUMERIC(10,2),
+    vat              NUMERIC(4,0),
+    k_barcode        CHAR(25),
+    k_item_code      CHAR(5),
+    k_issue_number   CHAR(5),
+    k_delivery_date  CHAR(8),
+    k_item_name      VARCHAR(25),
+    kioskid          UUID NOT NULL,
+
+    CONSTRAINT fk_receipts_det_kiosk
+        FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+CREATE INDEX recdet_created_on
+    ON receipts_det (created_on);
+
+--x_report
+CREATE TABLE x_report (
+    user_id           UUID,
+    from_date         TIMESTAMP(6),
+    to_date           TIMESTAMP(6),
+    total_receipts    NUMERIC(10,0),
+    total_amt         NUMERIC(10,2),
+    total5percent     NUMERIC(10,2),
+    total19percent    NUMERIC(10,2),
+    initial_amt       NUMERIC(10,2),
+    final_amt         NUMERIC(10,2),
+    payments          NUMERIC(10,2),
+    created_on        TIMESTAMP(6),
+    total0percent     NUMERIC(10,2),
+    amount_laxeia     NUMERIC(10,2),
+    initialamtlaxeia  NUMERIC(10,2),
+    amountvisa        NUMERIC(10,2),
+    finalamtlaxeia    NUMERIC(10,2),
+    description       TEXT,
+    total3percent     NUMERIC(10,2),
+    kioskid           UUID NOT NULL,
+
+    CONSTRAINT fk_x_report_kiosk
+        FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT fk_xreport_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(uuid)
+);
+
+
+ALTER TABLE x_report
+ADD CONSTRAINT pk_x_report PRIMARY KEY (user_id, created_on);
+
+CREATE INDEX idx_xreport_created_on
+ON x_report (user_id, created_on DESC);
+
+--payments
+ CREATE TABLE payments (
+    created_by  UUID,
+    created_on  TIMESTAMP(6),
+    amount      NUMERIC(10,2),
+    vat         VARCHAR(2),
+    amountvat   NUMERIC(10,2),
+    inv_number  VARCHAR(32),
+    supplier_id VARCHAR(32),
+    kioskid     UUID NOT NULL,
+
+    CONSTRAINT fk_payments_kiosk
+        FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT fk_payments_created_by
+        FOREIGN KEY (created_by)
+        REFERENCES users(uuid)
+);
+
+CREATE INDEX pay_created_by_idx ON payments (created_by);
+CREATE INDEX pay_created_on_idx ON payments (created_on);
+CREATE INDEX pay_kioskid_idx ON payments (kioskid);
+
 
 --VAT Types
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -151,3 +645,35 @@ VALUES (gen_random_uuid(), 'V.A.T 9%', 9);
 
 INSERT INTO vat_types (uuid, description, vat)
 VALUES (gen_random_uuid(), 'V.A.T 19%', 19);
+
+--TODO
+CREATE INDEX idx_payments_kiosk_user_createdon
+    ON payments(kioskid, created_by, created_on);
+
+CREATE INDEX idx_receipts_kiosk_user_createdon
+    ON receipts(kioskid, created_by, created_on);
+
+CREATE INDEX idx_receipts_det_kiosk_receipt
+    ON receipts_det(kioskid, receipt_serno);
+
+CREATE INDEX idx_sessions_user_login_when
+    ON sessions(user_id, login_when);
+
+CREATE INDEX idx_products_serno
+    ON products(serno);
+
+CREATE INDEX idx_receipts_kiosk_user_createdon
+    ON receipts(kioskid, created_by, created_on);
+
+CREATE INDEX idx_receipts_det_kiosk_receipt_vat
+    ON receipts_det(kioskid, receipt_serno, vat);
+
+CREATE INDEX idx_sessions_kiosk_user_login_when
+    ON sessions(kioskid, user_id, login_when);
+
+CREATE INDEX idx_receipts_kiosk_user_payment_createdon
+    ON receipts(kioskid, created_by, payment_type, created_on);
+
+CREATE INDEX idx_sessions_kiosk_user_login_when
+    ON sessions(kioskid, user_id, login_when);
+
