@@ -1,5 +1,10 @@
 ﻿Imports System.Data
+Imports System.Globalization
 Imports System.IO
+Imports System.Printing
+Imports System.Windows.Xps
+Imports System.Windows.Xps.Packaging
+Imports kiosk_2026.GlobalModule
 Imports Npgsql
 Imports Npgsql.Replication.PgOutput.Messages
 Imports NpgsqlTypes
@@ -10,9 +15,12 @@ Module GlobalModule
     Public username As String
     Public whois As String
     Public currentUser As User
+    Public currentUserID As String
+
     Public dualMonitor As Boolean = False
     Public computerName As String
     Public kioskid As String
+
     Public divideFactor0 As Double = 1
     Public divideFactor3 As Double = 1
     Public divideFactor5 As Double = 1
@@ -432,6 +440,197 @@ Module GlobalModule
                 MessageBoxImage.Error
             )
         End Try
+    End Sub
+
+
+    Public Sub LogoutCurrentUser()
+        Dim WhoAmI As String = "LogoutUser"
+        Dim sql As String = ""
+
+        Try
+            Using conn = PostgresConnection.GetConnection()
+                conn.Open()
+                sql = "UPDATE
+                            sessions
+                       SET
+                            is_active = FALSE,
+                            logout_when = CURRENT_TIMESTAMP
+                        WHERE
+                            kioskid = @kioskid
+                        And
+                            user_id = @userid
+                        And 
+                            is_active = TRUE"
+                Dim cmd As New NpgsqlCommand(sql, conn)
+                cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
+                cmd.Parameters.Add("@userid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(currentUserID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            CreateExceptionFile($"{WhoAmI}: {ex.Message}", sql)
+            MessageBox.Show(ex.Message, "Application Error", MessageBoxButton.OK, MessageBoxImage.Error)
+        End Try
+
+    End Sub
+
+    Public Sub PrintXReportSilent(userId As Guid, userName As String)
+
+        Dim tempXps As String = System.IO.Path.GetTempFileName() & ".xps"
+
+        ' Create XPS document
+        Using xpsDoc As New XpsDocument(tempXps, IO.FileAccess.ReadWrite)
+
+            Dim writer As XpsDocumentWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc)
+
+            Dim dv As New DrawingVisual()
+
+            Using dc As DrawingContext = dv.RenderOpen()
+
+                Dim headerFont As New Typeface(REPORT_FONT)
+                Dim reportFont As New Typeface(REPORT_FONT)
+
+                Dim y As Double = 0
+
+                ' Header
+                dc.DrawText(New FormattedText(
+                KIOSK_NAME,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                headerFont,
+                15,
+                Brushes.Black), New Point(65, y))
+
+                y += 35
+                dc.DrawText(New FormattedText(COMPANY_NAME, CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, reportFont, 9, Brushes.Black), New Point(95, y))
+
+                y += 15
+                dc.DrawText(New FormattedText(KIOSK_ADDRESS1, CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, reportFont, 9, Brushes.Black), New Point(75, y))
+
+                y += 15
+                dc.DrawText(New FormattedText(KIOSK_ADDRESS2, CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, reportFont, 9, Brushes.Black), New Point(95, y))
+
+                y += 15
+                dc.DrawText(New FormattedText(COMPANY_VAT, CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, reportFont, 9, Brushes.Black), New Point(60, y))
+
+                y += 15
+                dc.DrawText(New FormattedText(SINGE_DASHED_LINE, CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, reportFont, 9, Brushes.Black), New Point(0, y))
+
+                y += 15
+                dc.DrawText(New FormattedText(
+                "Χρήστης: " + userName,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                reportFont,
+                9,
+                Brushes.Black), New Point(0, y))
+
+                Dim sql As String =
+                                    "SELECT
+                                        from_date,
+                                        to_date,
+                                        total_receipts,
+                                        total5percent,
+                                        total19percent,
+                                        payments,
+                                        initial_amt,
+                                        final_amt,
+                                        description,
+                                        total0percent,
+                                        amount_laxeia,
+                                        initialamtlaxeia,
+                                        amountvisa,
+                                        total3percent
+                                    FROM x_report
+                                    WHERE kioskid = @kioskid
+                                      AND user_id = @userid
+                                      AND created_on = (
+                                            SELECT MAX(created_on)
+                                            FROM x_report
+                                            WHERE kioskid = @kioskid
+                                              AND user_id = @userid
+                                      );
+                                    "
+
+                Using conn = PostgresConnection.GetConnection()
+                    conn.Open()
+
+                    Using cmd As New NpgsqlCommand(sql, conn)
+
+                        cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
+                        cmd.Parameters.AddWithValue("@userid", userId)
+
+                        Using dr As NpgsqlDataReader = cmd.ExecuteReader()
+
+                            If dr.Read() Then
+
+                                y += 40
+                                dc.DrawText(New FormattedText(
+                                    "Από: " & dr.GetValue(0).ToString(),
+                                    CultureInfo.CurrentCulture,
+                                    FlowDirection.LeftToRight,
+                                    reportFont,
+                                    9,
+                                    Brushes.Black), New Point(0, y))
+
+                                y += 20
+                                dc.DrawText(New FormattedText(
+                                    "Έως: " & dr.GetValue(1).ToString(),
+                                    CultureInfo.CurrentCulture,
+                                    FlowDirection.LeftToRight,
+                                    reportFont,
+                                    9,
+                                    Brushes.Black), New Point(0, y))
+
+                                Dim totalvat0 As Double = CDbl(dr.GetValue(9))
+                                Dim totalvat3 As Double = CDbl(dr.GetValue(13))
+                                Dim totalvat5 As Double = CDbl(dr.GetValue(3))
+                                Dim totalvat19 As Double = CDbl(dr.GetValue(4))
+                                Dim payments As Double = CDbl(dr.GetValue(5))
+                                Dim initial As Double = CDbl(dr.GetValue(6))
+                                Dim amountvisa As Double = CDbl(dr.GetValue(12))
+                                Dim initialamountlaxeia As Double = CDbl(dr.GetValue(11))
+                                Dim amountlaxeia As Double = CDbl(dr.GetValue(10))
+
+                                Dim totalreceived =
+                                    totalvat0 + totalvat3 + totalvat5 + totalvat19
+
+                                Dim totalToDeliver =
+                                    (totalreceived + initial) - payments - amountvisa
+
+                                y += 20
+                                dc.DrawText(New FormattedText(
+                                    "αρχικό ποσό: " & initial.ToString("n2"),
+                                    CultureInfo.CurrentCulture,
+                                    FlowDirection.LeftToRight,
+                                    reportFont,
+                                    9,
+                                    Brushes.Black), New Point(0, y))
+
+                                y += 40
+                                dc.DrawText(New FormattedText(
+                                    "ποσο λαχείων για παράδωση: " &
+                                    (initialamountlaxeia - amountlaxeia).ToString("n2"),
+                                    CultureInfo.CurrentCulture,
+                                    FlowDirection.LeftToRight,
+                                    reportFont,
+                                    9,
+                                    Brushes.Black), New Point(0, y))
+                            End If
+                        End Using
+                    End Using
+                End Using
+            End Using
+            writer.Write(dv)
+        End Using
+
+        Dim server As New PrintServer()
+        Dim queue As PrintQueue = LocalPrintServer.GetDefaultPrintQueue()
+        queue.AddJob("X Report", tempXps, False)
     End Sub
 
 

@@ -1,0 +1,40 @@
+﻿<Window x:Name="AdminWindow" x:Class="AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kiosk_2026"
+        mc:Ignorable="d"
+        Title="Admin Window" Height="722" Width="1022" ResizeMode="NoResize" Background="#FFD4D0C8">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="793*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Welcome User" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Segoe UI Semibold" Grid.Column="1"/>
+        <TextBox x:Name="txtBoxUser" HorizontalAlignment="Left" Margin="139,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="18" Grid.Column="1" IsReadOnly="True" Background="#FFFFE1C0"/>
+        <Label Content="v0.01" HorizontalAlignment="Left" Margin="739,10,0,0" VerticalAlignment="Top" FontSize="9" FontFamily="Segoe UI Semibold" FontWeight="Bold" Grid.Column="1"/>
+        <Button x:Name="btnPOS" Content="POS" HorizontalAlignment="Left" Margin="8,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnUsers" Content="Users" HorizontalAlignment="Left" Margin="194,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnProducts" Content="Products" HorizontalAlignment="Left" Margin="8,164,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnInvoices" Content="Invoices" HorizontalAlignment="Left" Margin="194,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnSuppliers" Content="Suppliers" HorizontalAlignment="Left" Margin="380,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnReports" Content="Reports" HorizontalAlignment="Left" Margin="380,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnCategories" Content="Categories" HorizontalAlignment="Left" Margin="567,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnReceipts" Content="Receipts" HorizontalAlignment="Left" Margin="567,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnBackup" Content="POS Management" HorizontalAlignment="Left" Margin="753,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnLottery" Content="Lottery" HorizontalAlignment="Left" Margin="753,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button Content="Backup" HorizontalAlignment="Left" Margin="948,52,0,0" VerticalAlignment="Top" Height="102" Width="53" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="753,283,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnUpdate" Content="Save" HorizontalAlignment="Left" Margin="196,283,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnOffers" Content="Offers" HorizontalAlignment="Left" Margin="567,283,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Label Content="Inital POS Amount" HorizontalAlignment="Left" Margin="5,270,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Segoe UI Semibold" Grid.Column="1" />
+        <TextBox x:Name="txtBoxInitialFiscalAmt" HorizontalAlignment="Left" Margin="28,305,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="18" Grid.Column="1" Background="#FFFFE1C0"/>
+        <DataGrid x:Name="dgvMessages" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="6,389,519,7" Background="#FFFFE1C0"/>
+        <DataGrid x:Name="dgvExpiry" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="509,389,13,167" Grid.Column="1" Background="#FFFFE1C0"/>
+        <DataGrid x:Name="dgvSuppliers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="509,549,13,7" Grid.Column="1" Background="#FFFFE1C0"/>
+        <Button x:Name="btnMessages" Content="Messages" HorizontalAlignment="Left" Margin="15,338,0,0" VerticalAlignment="Top" Height="46" Width="145" Grid.Column="1" FontSize="27"/>
+
+    </Grid>
+</Window>

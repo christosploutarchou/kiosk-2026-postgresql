@@ -225,6 +225,7 @@ Class LoginWindow
                     Using reader = cmd.ExecuteReader()
                         If reader.Read() Then
                             userUuid = reader.GetGuid(reader.GetOrdinal("uuid"))
+                            currentUserID = userUuid.ToString
                             currentUser.isAdmin = reader.GetBoolean(reader.GetOrdinal("is_admin"))
                             currentUser.canViewReports = reader.GetBoolean(reader.GetOrdinal("can_view_reports"))
                             currentUser.canEditProducts = reader.GetBoolean(reader.GetOrdinal("can_edit_products"))
@@ -297,8 +298,9 @@ Class LoginWindow
         End If
 
         If currentUser.isAdmin Then
-            'Dim w As New AdminWindow()
-            'w.Show()
+            Dim adminWindow As New AdminWindow()
+            Application.Current.MainWindow.Hide()
+            adminWindow.Show()
         Else
             'Dim w As New PosWindow()
             'w.Show()

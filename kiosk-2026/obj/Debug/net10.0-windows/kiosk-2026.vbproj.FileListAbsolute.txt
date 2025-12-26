@@ -25,6 +25,13 @@ C:\Users\PC\Desktop\PROJECTS\kiosk-2026\kiosk-2026\obj\Debug\net10.0-windows\kio
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026.vbproj.Up2Date
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026\kiosk-2026\obj\Debug\net10.0-windows\UnlockWindow.g.vb
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026\kiosk-2026\obj\Debug\net10.0-windows\UnlockWindow.baml
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026.vbproj.AssemblyReference.cache
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\AdminWindow.g.vb
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\LoginWindow.g.vb
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\UnlockWindow.g.vb
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\Application.g.vb
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026_MarkupCompile.cache
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026_MarkupCompile.lref
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\kiosk-2026.exe
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\kiosk-2026.deps.json
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\kiosk-2026.runtimeconfig.json
@@ -33,12 +40,7 @@ C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\Npgsql.dll
-C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026.vbproj.AssemblyReference.cache
-C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\LoginWindow.g.vb
-C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\UnlockWindow.g.vb
-C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\Application.g.vb
-C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026_MarkupCompile.cache
-C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026_MarkupCompile.lref
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\AdminWindow.baml
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\LoginWindow.baml
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\UnlockWindow.baml
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026.g.resources
