@@ -196,7 +196,7 @@ Partial Public Class AdminWindow
             Return
         End If
         _contentLoaded = true
-        Dim resourceLocater As System.Uri = New System.Uri("/kiosk-2026;component/adminwindow.xaml", System.UriKind.Relative)
+        Dim resourceLocater As System.Uri = New System.Uri("/kiosk-2026;V1.0.0.0;component/adminwindow.xaml", System.UriKind.Relative)
         
         #ExternalSource("..\..\..\AdminWindow.xaml",1)
         System.Windows.Application.LoadComponent(Me, resourceLocater)

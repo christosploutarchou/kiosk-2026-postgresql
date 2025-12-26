@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|c:\\users\\pc\\desktop\\projects\\kiosk-2026-postgresql\\kiosk-2026\\adminwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|solutionrelative:kiosk-2026\\adminwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|c:\\users\\pc\\desktop\\projects\\kiosk-2026-postgresql\\kiosk-2026\\unlockwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|solutionrelative:kiosk-2026\\unlockwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|c:\\users\\pc\\desktop\\projects\\kiosk-2026-postgresql\\kiosk-2026\\module1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|solutionrelative:kiosk-2026\\module1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|c:\\users\\pc\\desktop\\projects\\kiosk-2026-postgresql\\kiosk-2026\\adminwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|solutionrelative:kiosk-2026\\adminwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{51919BD6-A493-654E-B7A6-3D4AC15E0940}|kiosk-2026\\kiosk-2026.vbproj|c:\\users\\pc\\desktop\\projects\\kiosk-2026-postgresql\\kiosk-2026\\unlockwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -49,33 +49,16 @@
           "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdminWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\AdminWindow.xaml",
-              "RelativeDocumentMoniker": "kiosk-2026\\AdminWindow.xaml",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\AdminWindow.xaml",
-              "RelativeToolTip": "kiosk-2026\\AdminWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-26T08:30:04.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AdminWindow.xaml.vb",
               "DocumentMoniker": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\AdminWindow.xaml.vb",
               "RelativeDocumentMoniker": "kiosk-2026\\AdminWindow.xaml.vb",
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\AdminWindow.xaml.vb",
               "RelativeToolTip": "kiosk-2026\\AdminWindow.xaml.vb",
-              "ViewState": "AgIAAHEBAAAAAAAAAAAswIIBAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAHEBAAAAAAAAAAAswH4BAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-12-26T08:27:26.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-26T08:27:26.242Z"
             },
             {
               "$type": "Document",
@@ -86,18 +69,17 @@
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\UnlockWindow.xaml",
               "RelativeToolTip": "kiosk-2026\\UnlockWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-24T15:16:54.73Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-24T15:16:54.73Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "UnlockWindow.xaml.vb",
               "DocumentMoniker": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\UnlockWindow.xaml.vb",
               "RelativeDocumentMoniker": "kiosk-2026\\UnlockWindow.xaml.vb",
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\UnlockWindow.xaml.vb",
               "RelativeToolTip": "kiosk-2026\\UnlockWindow.xaml.vb",
-              "ViewState": "AgIAADgAAAAAAAAAAAAswFgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAAFYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2025-12-24T15:27:10.954Z",
               "EditorCaption": ""
@@ -111,8 +93,7 @@
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\LoginWindow.xaml",
               "RelativeToolTip": "kiosk-2026\\LoginWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-21T13:14:08.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-21T13:14:08.152Z"
             },
             {
               "$type": "Document",
@@ -124,21 +105,19 @@
               "RelativeToolTip": "kiosk-2026\\LoginWindow.xaml.vb",
               "ViewState": "AgIAANAAAAAAAAAAAAAAAOMAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-11-22T14:28:35.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-22T14:28:35.592Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Module1.vb",
               "DocumentMoniker": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\Module1.vb",
               "RelativeDocumentMoniker": "kiosk-2026\\Module1.vb",
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\Module1.vb",
               "RelativeToolTip": "kiosk-2026\\Module1.vb",
-              "ViewState": "AgIAAPsBAAAAAAAAAAAUwA0CAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAALEBAAAAAAAAAAAqwL4BAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-11-22T15:00:12.022Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-22T15:00:12.022Z"
             },
             {
               "$type": "Document",
@@ -149,8 +128,18 @@
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\Application.xaml",
               "RelativeToolTip": "kiosk-2026\\Application.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-22T16:08:38.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-22T16:08:38.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\AdminWindow.xaml",
+              "RelativeDocumentMoniker": "kiosk-2026\\AdminWindow.xaml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\AdminWindow.xaml",
+              "RelativeToolTip": "kiosk-2026\\AdminWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-26T08:30:04.474Z"
             },
             {
               "$type": "Document",
@@ -162,8 +151,11 @@
               "RelativeToolTip": "kiosk-2026\\PostgresConnection.vb",
               "ViewState": "AgIAAAUAAAAAAAAAAAAQwAoAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-11-22T15:21:14.182Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-22T15:21:14.182Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
