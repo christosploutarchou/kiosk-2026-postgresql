@@ -1,0 +1,42 @@
+﻿<Window x:Class="CategoriesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Διαχείριση Κατηγοριών" Height="600" Width="924" ResizeMode="NoResize" Background="#FFD4D0C8">
+
+    <Canvas>
+        <!-- ListBox -->
+        <ListBox Canvas.Left="465" Canvas.Top="8" Width="428" Height="531"
+                 ItemsSource="{Binding Categories}" 
+                 SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" 
+                 Background="#FFFFE1C0" FontFamily="Segoe UI Semibold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock FontWeight="Bold">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} - VAT: {1}%">
+                                    <Binding Path="Description"/>
+                                    <Binding Path="Vat"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Labels and TextBoxes -->
+        <Label Content="Περιγραφή" FontSize="27" Canvas.Left="8" Canvas.Top="32" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxDescription" Text="{Binding SelectedCategory.Description, Mode=TwoWay}" 
+                 Background="#FFFFE1C0" FontSize="27" Canvas.Left="180" Canvas.Top="42" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <Label Content="Φ.Π.Α (%)" FontSize="27" Canvas.Left="8" Canvas.Top="105" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxVAT" Text="{Binding SelectedCategory.Vat, Mode=TwoWay}" 
+                 Background="#FFFFE1C0" FontSize="27" Canvas.Left="180" Canvas.Top="105" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+        <!-- Buttons -->
+        <Button Content="Αποθήκευση" Width="184" Height="75" Canvas.Left="16" Canvas.Top="465" Click="SaveButton_Click" FontSize="27" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Content="Νέα" Width="80" Height="75" Canvas.Left="218" Canvas.Top="465" Click="NewButton_Click" FontSize="27" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Έξοδος" Width="134" Height="75" Canvas.Left="319" Canvas.Top="465" Click="ExitButton_Click" FontSize="27" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    </Canvas>
+</Window>

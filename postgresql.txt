@@ -28661,6 +28661,11 @@ CREATE TABLE products (
         REFERENCES suppliers(uuid)
 );
 
+
+
+
+
+
 --sessions 
 -- Required once per database
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

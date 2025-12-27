@@ -5,5 +5,8 @@
     <Compile Update="AdminWindow.xaml.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CategoriesWindow.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

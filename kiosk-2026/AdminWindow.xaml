@@ -21,11 +21,27 @@
         <Button x:Name="btnInvoices" Content="Invoices" HorizontalAlignment="Left" Margin="194,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnSuppliers" Content="Suppliers" HorizontalAlignment="Left" Margin="380,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnReports" Content="Reports" HorizontalAlignment="Left" Margin="380,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
-        <Button x:Name="btnCategories" Content="Categories" HorizontalAlignment="Left" Margin="567,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
+        <Button x:Name="btnCategories"  HorizontalAlignment="Left" Margin="567,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"  Grid.Row="1" Focusable="False" Background="#FFD4D0C8">
+            <Grid>
+                <!-- Image stays fixed in the left corner -->
+                <Image Source="/categories.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                <!-- Button text -->
+                <TextBlock Text="Διαχείριση Κατηγοριών" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+            <!--TextBlock Text="Διαχείριση Κατηγοριών" TextWrapping="Wrap" TextAlignment="Center"/>
+            <Button.Background>
+                <ImageBrush ImageSource="/categories.png" 
+                    Stretch="None" 
+                    AlignmentX="Left" 
+                    AlignmentY="Top"/>
+            </Button.Background-->
+        </Button>
+
+
         <Button x:Name="btnReceipts" Content="Receipts" HorizontalAlignment="Left" Margin="567,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnBackup" Content="POS Management" HorizontalAlignment="Left" Margin="753,52,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnLottery" Content="Lottery" HorizontalAlignment="Left" Margin="753,165,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
-        <Button Content="Backup" HorizontalAlignment="Left" Margin="948,52,0,0" VerticalAlignment="Top" Height="102" Width="53" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="753,283,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnUpdate" Content="Save" HorizontalAlignment="Left" Margin="196,283,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>
         <Button x:Name="btnOffers" Content="Offers" HorizontalAlignment="Left" Margin="567,283,0,0" VerticalAlignment="Top" Height="102" Width="170" Grid.Column="1" FontSize="27"/>

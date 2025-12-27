@@ -298,9 +298,9 @@ Class LoginWindow
         End If
 
         If currentUser.isAdmin Then
-            Dim adminWindow As New AdminWindow()
+            AdminWin = New AdminWindow()
             Application.Current.MainWindow.Hide()
-            adminWindow.Show()
+            AdminWin.Show()
         Else
             'Dim w As New PosWindow()
             'w.Show()

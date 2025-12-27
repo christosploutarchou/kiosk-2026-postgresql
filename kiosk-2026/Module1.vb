@@ -11,6 +11,9 @@ Imports NpgsqlTypes
 
 Module GlobalModule
 
+    Public AdminWin As AdminWindow
+
+
     'Public Conn As NpgsqlConnection
     Public username As String
     Public whois As String

@@ -133,15 +133,6 @@ Public Class AdminWindow
     'End If
     'End Sub
 
-    'Private Sub btnCategories_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCategories.Click
-    'If Not isLoggedIn(username) Then
-    '       MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    'Exit Sub
-    'End If
-    'Me.Hide()
-    '   frmCategories.Show()
-    'End Sub
-
     'Private Sub cmdSuppliers_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdSuppliers.Click
     '    If Not isLoggedIn(username) Then
     '           MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -251,34 +242,34 @@ Public Class AdminWindow
                 ' =========================
                 Dim dayColumn As String = Date.Today.DayOfWeek.ToString().Substring(0, 3).ToUpper()
 
-                sql =
-                $"SELECT s_name, contact_name, phone_1, notes " &
-                $"FROM suppliers " &
-                $"WHERE kioskid = @kioskid AND {dayColumn} = 1 " &
-                $"ORDER BY s_name ASC"
+                If Not dayColumn.Equals("SAT") And Not dayColumn.Equals("SUN") Then
+                    sql =
+                            $"SELECT s_name, contact_name, phone_1, notes " &
+                            $"FROM suppliers " &
+                            $"WHERE kioskid = @kioskid AND {dayColumn} = 1 " &
+                            $"ORDER BY s_name ASC"
 
-                Dim supplierList As New List(Of Object)
-                Using cmd As New Npgsql.NpgsqlCommand(sql, conn)
-                    cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
+                    Dim supplierList As New List(Of Object)
+                    Using cmd As New Npgsql.NpgsqlCommand(sql, conn)
+                        cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
 
-                    Using dr = cmd.ExecuteReader()
-                        Dim i As Integer = 1
-                        While dr.Read()
-                            supplierList.Add(New With {
-                            .Index = i,
-                            .Supplier = dr.GetString(0),
-                            .Contact = dr.GetString(1),
-                            .Phone = dr.GetString(2),
-                            .Notes = dr.GetString(3)
-                        })
-                            i += 1
-                        End While
+                        Using dr = cmd.ExecuteReader()
+                            Dim i As Integer = 1
+                            While dr.Read()
+                                supplierList.Add(New With {
+                                .Index = i,
+                                .Supplier = dr.GetString(0),
+                                .Contact = dr.GetString(1),
+                                .Phone = dr.GetString(2),
+                                .Notes = dr.GetString(3)
+                            })
+                                i += 1
+                            End While
+                        End Using
                     End Using
-                End Using
-                dgvSuppliers.ItemsSource = supplierList
-
+                    dgvSuppliers.ItemsSource = supplierList
+                End If
             End Using
-
         Catch ex As Exception
             CreateExceptionFile($"{WhoAmI}: {ex.Message}", sql)
             MessageBox.Show(ex.Message, "Application Error",
@@ -390,6 +381,12 @@ Public Class AdminWindow
             Me.Close()
             Application.Current.MainWindow.Close()
         End If
+    End Sub
+
+    Private Sub BtnCategories_Click(sender As Object, e As RoutedEventArgs) Handles btnCategories.Click
+        Me.Hide()
+        Dim categoriesWindow As New CategoriesWindow
+        categoriesWindow.Show()
     End Sub
 
 
