@@ -1,7 +1,12 @@
 ﻿Imports System.Data
 Imports System.Drawing.Printing
+Imports System.Runtime.InteropServices
+Imports System.Windows.Interop
 
 Public Class AdminWindow
+
+    Private Const GWL_STYLE As Integer = -16
+    Private Const WS_SYSMENU As Integer = &H80000
 
     Private Sub AdminWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
 
@@ -85,15 +90,6 @@ Public Class AdminWindow
     ''frmLogin.Show()
     'End If
     'End Sub
-
-    Private Sub BtnUsers_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUsers.Click
-        'If Not isLoggedIn(username) Then
-        'MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'Exit Sub
-        'End If
-        'Me.Hide()
-        'frmNewUser.Show()
-    End Sub
 
     'Private Sub frmMain_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
     '    btnExit_Click(sender, e)
@@ -390,6 +386,11 @@ Public Class AdminWindow
     End Sub
 
 
+    Private Sub BtnUsers_Click(sender As Object, e As RoutedEventArgs) Handles btnUsers.Click
+        Me.Hide()
+        Dim usersWindow As New UsersWindow
+        usersWindow.Show()
+    End Sub
 
     'Private Sub btnPos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPos.Click
     '    If Not isLoggedIn(username) Then
@@ -582,4 +583,24 @@ Public Class AdminWindow
     '    Me.Hide()
     '    frmLottery.Show()
     'End Sub
+
+    <DllImport("user32.dll")>
+    Private Shared Function GetWindowLong(hWnd As IntPtr, nIndex As Integer) As Integer
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function SetWindowLong(hWnd As IntPtr, nIndex As Integer, dwNewLong As Integer) As Integer
+    End Function
+
+    Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        Dim hwnd As IntPtr = New WindowInteropHelper(Me).Handle
+        Dim style As Integer = GetWindowLong(hwnd, GWL_STYLE)
+        SetWindowLong(hwnd, GWL_STYLE, style And Not WS_SYSMENU)
+    End Sub
+
+    Private Sub btnSuppliers_Click(sender As Object, e As RoutedEventArgs) Handles btnSuppliers.Click
+        Me.Hide()
+        Dim suppliersWindow As New SuppliersWindow
+        suppliersWindow.Show()
+    End Sub
 End Class

@@ -21,8 +21,19 @@
         <Button x:Name="btn0" Content="0" Canvas.Left="304" Canvas.Top="434" Background="#FFD4D0C8" Height="60" Width="251" FontSize="27" FontWeight="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Click="NumberButton_Click"/>
         <Button x:Name="btnClear" Content="Clear" Canvas.Left="567" Canvas.Top="237" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button x:Name="btnBack" Content="Back" Canvas.Left="567" Canvas.Top="303" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="btnLogin" Content="Login" Canvas.Left="567" Canvas.Top="369" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="btnExit" Content="Exit" Canvas.Left="567" Canvas.Top="434" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="btnLogin"  Canvas.Left="567" Canvas.Top="369"  Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8">
+            <Grid>
+                <Image Source="/loginButton.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Είσοδος" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
+
+        <Button x:Name="btnExit"  Canvas.Left="567" Canvas.Top="434"  Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8">
+            <Grid>
+                <Image Source="/exit.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Έξοδος" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
         <Label x:Name="lblLoginTitle1" Content="Label" Canvas.Left="445" Canvas.Top="7" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe UI Black"/>
         <Label x:Name="lblLoginTitle2" Content="Label" Canvas.Left="345" Canvas.Top="51" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
     </Canvas>

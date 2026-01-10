@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>kiosk-2026</id>
+    <version>1.0.0</version>
+    <authors>kiosk-2026</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="3dfccbc73a44a1bf65905dacb140b000e298ab07" />
+    <dependencies>
+      <group targetFramework="net10.0-windows7.0">
+        <dependency id="Npgsql" version="9.0.4" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net10.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\kiosk-2026.runtimeconfig.json" target="lib\net10.0-windows7.0\kiosk-2026.runtimeconfig.json" />
+    <file src="C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\kiosk-2026.dll" target="lib\net10.0-windows7.0\kiosk-2026.dll" />
+  </files>
+</package>

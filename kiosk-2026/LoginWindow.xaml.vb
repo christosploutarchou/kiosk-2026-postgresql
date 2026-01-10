@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.IO
+Imports kiosk_2026.SuppliersWindow
 Imports Npgsql
 
 Class LoginWindow
@@ -49,7 +50,7 @@ Class LoginWindow
                 conn.Open()
 
                 ' Use parameterized query to prevent SQL injection
-                sql = "SELECT username FROM users WHERE kioskid = @kioskid ORDER BY username;"
+                sql = "SELECT username FROM users WHERE kioskid = @kioskid AND deleted = FALSE ORDER BY username;"
                 Using cmd As New NpgsqlCommand(sql, conn)
                     ' Ensure kioskid is passed as UUID type if needed
                     cmd.Parameters.Add("@kioskid", NpgsqlTypes.NpgsqlDbType.Uuid).Value = Guid.Parse(kioskid)
@@ -163,6 +164,10 @@ Class LoginWindow
         username = CStr(lstboxUsers.SelectedValue)
         whois = ""
         Dim isConnected As Boolean = False
+        If String.IsNullOrWhiteSpace(username) Then
+            MessageBox.Show("Δεν έχετε επιλέξει χρήστη", "Πληροφορία", MessageBoxButton.OK, MessageBoxImage.Error)
+            Exit Sub
+        End If
 
         '--------------------------------------------------
         ' 1️ - Check if user already has an active session
@@ -192,7 +197,7 @@ Class LoginWindow
         End Try
 
         If isConnected Then
-            MessageBox.Show("User already logged in!", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Ο χρήστης είναι ήδη ενωμένος!", "Σφάλμα σύνδεσης", MessageBoxButton.OK, MessageBoxImage.Error)
             Return
         End If
 
@@ -208,13 +213,13 @@ Class LoginWindow
                 Using cmd As New NpgsqlCommand("
                 SELECT
                     uuid,
-                    is_admin,
-                    COALESCE(can_view_reports, FALSE) AS can_view_reports,
-                    COALESCE(can_edit_products, FALSE) AS can_edit_products,
-                    COALESCE(can_edit_products_full, FALSE) AS can_edit_products_full,
-                    is_unlock
+                    access_level,
+                    COALESCE(view_reports, FALSE) AS view_reports,
+                    COALESCE(edit_prod, FALSE) AS edit_prod,
+                    COALESCE(edit_prod_full, FALSE) AS edit_prod_full,
+                    COALESCE(is_unlock, FALSE) AS is_unlock
                 FROM users
-                WHERE kioskid= @kioskid AND username = @username
+                WHERE kioskid= @kioskid AND deleted = FALSE AND username = @username
                   AND pass = @pass
             ", conn)
 
@@ -226,13 +231,13 @@ Class LoginWindow
                         If reader.Read() Then
                             userUuid = reader.GetGuid(reader.GetOrdinal("uuid"))
                             currentUserID = userUuid.ToString
-                            currentUser.isAdmin = reader.GetBoolean(reader.GetOrdinal("is_admin"))
-                            currentUser.canViewReports = reader.GetBoolean(reader.GetOrdinal("can_view_reports"))
-                            currentUser.canEditProducts = reader.GetBoolean(reader.GetOrdinal("can_edit_products"))
-                            currentUser.canEditProductsFull = reader.GetBoolean(reader.GetOrdinal("can_edit_products_full"))
+                            currentUser.isAdmin = reader.GetBoolean(reader.GetOrdinal("access_level"))
+                            currentUser.canViewReports = reader.GetBoolean(reader.GetOrdinal("view_reports"))
+                            currentUser.canEditProducts = reader.GetBoolean(reader.GetOrdinal("edit_prod"))
+                            currentUser.canEditProductsFull = reader.GetBoolean(reader.GetOrdinal("edit_prod_full"))
                             currentUser.isUnlock = reader.GetBoolean(reader.GetOrdinal("is_unlock"))
                         Else
-                            MessageBox.Show("Invalid username or password", "Login Failed",
+                            MessageBox.Show("Λανθασμένος κωδικός", "Αποτυχία σύνδεσης",
                                         MessageBoxButton.OK, MessageBoxImage.Error)
                             Return
                         End If
@@ -241,7 +246,7 @@ Class LoginWindow
             End Using
 
         Catch ex As Exception
-            MessageBox.Show("Login error: " & ex.Message)
+            MessageBox.Show("Αποτυχία σύνδεσης: " & ex.Message)
             Return
         End Try
 

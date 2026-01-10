@@ -42,20 +42,32 @@ CREATE TABLE users (
         ON UPDATE CASCADE
 );
 
-INSERT INTO users (
-    username, fullname, phone, id_num, pass,
-    is_admin, can_view_reports, can_edit_products, can_edit_products_full, kioskid
-) VALUES (
-    'christos', 'Christos Ploutarchou', '+357-99-518802', 'ID123456', '123',
-    TRUE, TRUE, TRUE, FALSE, '41bb87b1-f185-4468-a810-432c1477a96a'
-);
 
-INSERT INTO users (
-    username, fullname, phone, id_num, pass,
-    is_admin, can_view_reports, can_edit_products, can_edit_products_full, is_unlock, kioskid
-) VALUES (
-    'unlock', 'unlock', '0', '0', '123',
-    TRUE, TRUE, TRUE, FALSE, TRUE, '41bb87b1-f185-4468-a810-432c1477a96a'
+
+--
+
+CREATE TABLE users (
+    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    username varchar(32),
+    deleted boolean,
+    access_level boolean,
+    is_unlock boolean,
+    pass varchar(32),
+    fullname varchar(100),
+    phone varchar(60),
+    address varchar(100),
+    id_num varchar(100),
+    deleted_by varchar(36),
+    created_by varchar(36),
+    view_reports boolean,
+    edit_prod boolean,
+	edit_prod_full boolean,
+	kioskid UUID NOT NULL,
+	
+	FOREIGN KEY (kioskid)
+        REFERENCES kiosks(kioskid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE INDEX ON users(kioskid);

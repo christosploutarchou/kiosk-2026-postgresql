@@ -1,13 +1,16 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
+Imports System.Windows.Interop
 Imports Npgsql
-Imports System.Threading.Tasks
-Imports System.Windows
 
 Public Class CategoriesWindow
     Inherits Window
     Implements INotifyPropertyChanged
+
+    Private Const GWL_STYLE As Integer = -16
+    Private Const WS_SYSMENU As Integer = &H80000
 
     ' ---------- Category Model ----------
     Public Class Category
@@ -81,7 +84,7 @@ Public Class CategoriesWindow
     End Sub
 
     ' ---------- Load Categories ----------
-    Private Async Sub Window_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+    Private Async Sub CategoriesWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Await FillCategoriesAsync()
     End Sub
 
@@ -167,7 +170,11 @@ Public Class CategoriesWindow
                     End If
                 End Using
             End Using
-
+            txtBoxDescription.IsEnabled = False
+            MessageBox.Show("Η εντολή εκτελέστηκε επιτυχώς",
+            "Πληροφορία",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information)
         Catch ex As Exception
             CreateExceptionFile($"{WhoAmI}: {ex.Message}", "Save/Update Category")
             MessageBox.Show(
@@ -196,6 +203,11 @@ Public Class CategoriesWindow
 
     Private Sub NewButton_Click(sender As Object, e As RoutedEventArgs)
         SelectedCategory = New Category()
+        txtBoxDescription.IsEnabled = True
+        MessageBox.Show("Συπληρώστε τα στοιχεία και πατήστε αποθήκευση",
+                "Νέα κατηγορία",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information)
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As RoutedEventArgs)
@@ -206,4 +218,19 @@ Public Class CategoriesWindow
         Me.Close()
     End Sub
 
+
+    <DllImport("user32.dll")>
+    Private Shared Function GetWindowLong(hWnd As IntPtr, nIndex As Integer) As Integer
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function SetWindowLong(hWnd As IntPtr, nIndex As Integer, dwNewLong As Integer) As Integer
+    End Function
+
+    Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        Dim hwnd As IntPtr = New WindowInteropHelper(Me).Handle
+        Dim style As Integer = GetWindowLong(hwnd, GWL_STYLE)
+        SetWindowLong(hwnd, GWL_STYLE, style And Not WS_SYSMENU)
+        txtBoxDescription.IsEnabled = False
+    End Sub
 End Class

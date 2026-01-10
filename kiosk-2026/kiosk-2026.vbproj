@@ -9,6 +9,14 @@
 
   <ItemGroup>
     <None Remove="categories.png" />
+    <None Remove="exit.png" />
+    <None Remove="loginButton.png" />
+    <None Remove="logout.png" />
+    <None Remove="messages.png" />
+    <None Remove="save.png" />
+    <None Remove="suppliers.jpg" />
+    <None Remove="suppliers.png" />
+    <None Remove="users.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +37,23 @@
 
   <ItemGroup>
     <Resource Include="categories.png" />
+    <Resource Include="exit.png" />
+    <Resource Include="loginButton.png" />
+    <Resource Include="logout.png" />
+    <Resource Include="messages.png" />
+    <Resource Include="save.png" />
+    <Resource Include="suppliers.jpg" />
+    <Resource Include="suppliers.png" />
+    <Resource Include="users.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SuppliersWindow.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UsersWindow.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

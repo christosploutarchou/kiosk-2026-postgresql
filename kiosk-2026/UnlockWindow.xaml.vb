@@ -1,8 +1,4 @@
 ﻿Imports Npgsql
-Imports System.Printing
-Imports System.Windows.Xps
-Imports System.Windows.Xps.Packaging
-Imports System.Globalization
 Imports System.Runtime.InteropServices
 Imports System.Windows.Interop
 
@@ -53,10 +49,6 @@ Class UnlockWindow
             MessageBoxImage.Error
         )
         End Try
-    End Sub
-
-    Private Sub BtnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
-        Me.Close()
     End Sub
 
     Private Sub BtnUnlock_Click(sender As Object, e As RoutedEventArgs) Handles btnUnlock.Click
@@ -114,8 +106,6 @@ Class UnlockWindow
         End Try
     End Sub
 
-
-
     <DllImport("user32.dll")>
     Private Shared Function GetWindowLong(hWnd As IntPtr, nIndex As Integer) As Integer
     End Function
@@ -130,4 +120,7 @@ Class UnlockWindow
         SetWindowLong(hwnd, GWL_STYLE, style And Not WS_SYSMENU)
     End Sub
 
+    Private Sub btnExit_Click(sender As Object, e As RoutedEventArgs) Handles btnExit.Click
+        Me.Close()
+    End Sub
 End Class

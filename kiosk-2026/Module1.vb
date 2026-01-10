@@ -12,7 +12,9 @@ Imports NpgsqlTypes
 Module GlobalModule
 
     Public AdminWin As AdminWindow
-
+    Public UsersWin As UsersWindow
+    Public CategoriesWin As CategoriesWindow
+    Public SuppliersWin As SuppliersWindow
 
     'Public Conn As NpgsqlConnection
     Public username As String

@@ -1,0 +1,85 @@
+﻿<Window x:Class="SuppliersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Διαχείριση Προμηθευτών" Height="800" Width="1024" ResizeMode="NoResize" Background="#FFD4D0C8">
+
+    <Canvas>
+        <!-- ListBox -->
+        <ListBox Canvas.Left="640" Canvas.Top="8" Width="353" Height="616"
+                 ItemsSource="{Binding Suppliers}" 
+                 SelectedItem="{Binding SelectedSupplier, Mode=TwoWay}" 
+                 Background="#FFFFE1C0" FontFamily="Segoe UI Semibold" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Labels and TextBoxes -->
+        <Label Content="Όνομα" FontSize="27" Canvas.Left="8" Canvas.Top="20" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxName" Text="{Binding SelectedSupplier.Name, Mode=TwoWay}" 
+                 Background="#FFFFE1C0" FontSize="27" Canvas.Left="280" Canvas.Top="20" Width="340" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.009"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+
+        <Label Content="Όνομα Επικοινωνίας" FontSize="27" Canvas.Left="8" Canvas.Top="80" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxContact" Text="{Binding SelectedSupplier.ContactName, Mode=TwoWay}" 
+                 Background="#FFFFE1C0" FontSize="27" Canvas.Left="280" Canvas.Top="80" Width="340" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Label Content="Τηλέφωνο (1)" FontSize="27" Canvas.Left="8" Canvas.Top="140" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxPhone1" Text="{Binding SelectedSupplier.Phone_1, Mode=TwoWay}" 
+         Background="#FFFFE1C0" FontSize="27" Canvas.Left="280" Canvas.Top="140" Width="340" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Label Content="Τηλέφωνο (2)" FontSize="27" Canvas.Left="8" Canvas.Top="200" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxPhone2" Text="{Binding SelectedSupplier.Phone_2, Mode=TwoWay}" 
+         Background="#FFFFE1C0" FontSize="27" Canvas.Left="280" Canvas.Top="200" Width="340" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Label Content="Email" FontSize="27" Canvas.Left="8" Canvas.Top="260" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium"/>
+        <TextBox x:Name="txtBoxEmail" Text="{Binding SelectedSupplier.Email, Mode=TwoWay}" 
+         Background="#FFFFE1C0" FontSize="27" Canvas.Left="280" Canvas.Top="260" Width="340" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <CheckBox Content="Δ" FontSize="27" Canvas.Left="8" Canvas.Top="320"  IsChecked="{Binding SelectedSupplier.Mon, Mode=TwoWay}" FontWeight="Medium"/>
+
+        <CheckBox Content="Τ" FontSize="27" Canvas.Left="68" Canvas.Top="320"  IsChecked="{Binding SelectedSupplier.Tue, Mode=TwoWay}" FontWeight="Medium"/>
+
+        <CheckBox Content="Τ" FontSize="27" Canvas.Left="128" Canvas.Top="320"  IsChecked="{Binding SelectedSupplier.Wed, Mode=TwoWay}" FontWeight="Medium"/>
+
+        <CheckBox Content="Π" FontSize="27" Canvas.Left="188" Canvas.Top="320"  IsChecked="{Binding SelectedSupplier.Thu, Mode=TwoWay}" FontWeight="Medium"/>
+
+        <CheckBox Content="Π" FontSize="27" Canvas.Left="248" Canvas.Top="320"  IsChecked="{Binding SelectedSupplier.Fri, Mode=TwoWay}" FontWeight="Medium"/>
+
+
+        <Label Content="Σημειώσεις" FontSize="27" Canvas.Left="8" Canvas.Top="380" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium"/>
+        <TextBox x:Name="txtBlockNotes"
+         Text="{Binding SelectedSupplier.Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+         Background="#FFFFE1C0"
+         FontSize="27"
+         Canvas.Left="280"
+         Canvas.Top="380"
+         Width="340"
+         Height="242"
+         HorizontalAlignment="Center"
+         VerticalAlignment="Top"
+         AcceptsReturn="True"
+         TextWrapping="Wrap" />
+
+
+
+
+        <!-- Buttons -->
+        <Button Content="Αποθήκευση" Width="184" Height="60" Canvas.Left="396" Canvas.Top="665" Click="SaveButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Νέα" Width="80" Height="60" Canvas.Left="598" Canvas.Top="665" Click="NewButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Διαγραφή" Width="144" Height="60" Canvas.Left="698" Canvas.Top="665" Click="DeleteButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Content="Έξοδος" Width="144" Height="60" Canvas.Left="863" Canvas.Top="665" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    </Canvas>
+</Window>
