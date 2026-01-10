@@ -8,11 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="add.png" />
+    <None Remove="back.png" />
     <None Remove="categories.png" />
     <None Remove="exit.png" />
+    <None Remove="login.png" />
     <None Remove="loginButton.png" />
     <None Remove="logout.png" />
+    <None Remove="lottery.png" />
     <None Remove="messages.png" />
+    <None Remove="reset.png" />
     <None Remove="save.png" />
     <None Remove="suppliers.jpg" />
     <None Remove="suppliers.png" />
@@ -36,11 +41,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="add.png" />
+    <Resource Include="back.png" />
     <Resource Include="categories.png" />
     <Resource Include="exit.png" />
+    <Resource Include="login.png" />
     <Resource Include="loginButton.png" />
     <Resource Include="logout.png" />
+    <Resource Include="lottery.png" />
     <Resource Include="messages.png" />
+    <Resource Include="reset.png" />
     <Resource Include="save.png" />
     <Resource Include="suppliers.jpg" />
     <Resource Include="suppliers.png" />
@@ -48,6 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="LotteryWindow.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="SuppliersWindow.xaml.vb">
       <SubType>Code</SubType>
     </Compile>

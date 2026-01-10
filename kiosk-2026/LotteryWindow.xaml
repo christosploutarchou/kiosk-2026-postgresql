@@ -1,0 +1,58 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LotteryWindow"
+        Title="Διαχείριση Λαχείων" Height="745" Width="875" ResizeMode="NoResize" Background="#FFD4D0C8">
+
+    <Canvas Margin="0,0,0,34">
+
+        <!-- Labels and TextBoxes -->
+        <Label Content="Ολικό Ποσό Λαχείων" FontSize="27" Canvas.Left="8" Canvas.Top="20" FontWeight="Medium" />
+        <TextBox x:Name="txtBoxLotteryAmt"  Background="#FFFFE1C0" FontSize="27" Canvas.Left="300" Canvas.Top="20" Width="340" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="True"/>
+
+        <!-- Buttons -->
+        <Button  Width="151" Height="80" Canvas.Left="27" Canvas.Top="83" Click="NewButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Grid>
+                <Image Source="/add.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBlock Text="Προσθήκη" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
+        <Button  Width="184" Height="60" Canvas.Left="513" Canvas.Top="648" Click="SaveButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Grid>
+                <Image Source="/save.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBlock Text="Αποθήκευση" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
+
+        <Button  Width="134" Height="60" Canvas.Left="723" Canvas.Top="648" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Grid>
+                <Image Source="/exit.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBlock Text="Έξοδος" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
+
+        <DataGrid x:Name="dgvLinkedProducts"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          IsReadOnly="True" HorizontalAlignment="Center" Canvas.Left="10" Canvas.Top="199" VerticalAlignment="Top" FontSize="27">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Κωδικός"
+                            Binding="{Binding product_serno}" />
+
+                <DataGridTextColumn Header="Barcode"
+                            Binding="{Binding barcode}" />
+
+                <DataGridTextColumn Header="Περιγραφή"
+                            Binding="{Binding description}" />
+
+                <DataGridTextColumn Header="Ποσό πληρωμής"
+                            Binding="{Binding sell_amt}" />
+
+                <DataGridTextColumn Header="Διαθέσιμη Ποσότητα"
+                            Binding="{Binding avail_quantity}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Canvas>
+</Window>

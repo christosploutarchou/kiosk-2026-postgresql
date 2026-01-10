@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kiosk_2026"
         mc:Ignorable="d"
-        Title="Login" Height="570" Width="765" ResizeMode="NoResize" Background="#FFD4D0C8">
+        Title="Login" Height="570" Width="775" ResizeMode="NoResize" Background="#FFD4D0C8">
     <Canvas Height="NaN" Margin="10,17,456,17">
         <ListBox x:Name="lstboxUsers" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFE1C0" FontFamily="Segoe UI Semibold" FontSize="20" Height="485" HorizontalAlignment="Left" VerticalAlignment="Center" Width="285"/>
-        <PasswordBox x:Name="txtBoxPassword" HorizontalAlignment="Center" VerticalAlignment="Top" Width="404" FontSize="20" Background="#FFFFE1C0" Canvas.Left="315" Canvas.Top="179" />
+        <PasswordBox x:Name="txtBoxPassword" HorizontalAlignment="Center" VerticalAlignment="Top" Width="414" FontSize="20" Background="#FFFFE1C0" Canvas.Left="315" Canvas.Top="179" />
         <Button x:Name="btn7" Content="7" Canvas.Left="304" Canvas.Top="236" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8" Height="60" Width="80" FontSize="27" FontWeight="Black" Click="NumberButton_Click" />
         <Button x:Name="btn8" Content="8" Canvas.Left="390" Canvas.Top="236" Background="#FFD4D0C8" Height="60" Width="80" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Click="NumberButton_Click"/>
         <Button x:Name="btn9" Content="9" Canvas.Left="476" Canvas.Top="236" Background="#FFD4D0C8" Height="60" Width="80" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Click="NumberButton_Click"/>
@@ -19,16 +19,28 @@
         <Button x:Name="btn2" Content="2" Canvas.Left="390" Canvas.Top="368" Background="#FFD4D0C8" Height="60" Width="80" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Click="NumberButton_Click"/>
         <Button x:Name="btn3" Content="3" Canvas.Left="476" Canvas.Top="368" Background="#FFD4D0C8" Height="60" Width="80" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Click="NumberButton_Click"/>
         <Button x:Name="btn0" Content="0" Canvas.Left="304" Canvas.Top="434" Background="#FFD4D0C8" Height="60" Width="251" FontSize="27" FontWeight="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Click="NumberButton_Click"/>
-        <Button x:Name="btnClear" Content="Clear" Canvas.Left="567" Canvas.Top="237" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button x:Name="btnBack" Content="Back" Canvas.Left="567" Canvas.Top="303" Background="#FFD4D0C8" Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="btnLogin"  Canvas.Left="567" Canvas.Top="369"  Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8">
+        <Button x:Name="btnClear"  Canvas.Left="567" Canvas.Top="237" Background="#FFD4D0C8" Height="60" Width="173" FontSize="27" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Grid>
-                <Image Source="/loginButton.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Image Source="/reset.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Καθαρισμός" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
+
+        <Button x:Name="btnBack"  Canvas.Left="567" Canvas.Top="303" Background="#FFD4D0C8" Height="60" Width="173" FontSize="27" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid>
+                <Image Source="/back.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Πίσω" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
+            </Grid>
+        </Button>
+
+        <Button x:Name="btnLogin"  Canvas.Left="567" Canvas.Top="369"  Height="60" Width="173" FontSize="27" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8">
+            <Grid>
+                <Image Source="/login.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <TextBlock Text="Είσοδος" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>
             </Grid>
         </Button>
 
-        <Button x:Name="btnExit"  Canvas.Left="567" Canvas.Top="434"  Height="60" Width="163" FontSize="27" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8">
+        <Button x:Name="btnExit"  Canvas.Left="567" Canvas.Top="434"  Height="60" Width="173" FontSize="27" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFD4D0C8">
             <Grid>
                 <Image Source="/exit.png" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <TextBlock Text="Έξοδος" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" Height="68" FontSize="20"/>

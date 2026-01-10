@@ -35,11 +35,13 @@ C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\bin\Debug\net10.0-windows\Npgsql.dll
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\kiosk-2026.vbproj.AssemblyReference.cache
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\CategoriesWindow.baml
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\LotteryWindow.baml
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\SuppliersWindow.baml
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\UsersWindow.baml
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\AdminWindow.g.vb
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\CategoriesWindow.g.vb
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\LoginWindow.g.vb
+C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\LotteryWindow.g.vb
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\SuppliersWindow.g.vb
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\UnlockWindow.g.vb
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\obj\Debug\net10.0-windows\UsersWindow.g.vb

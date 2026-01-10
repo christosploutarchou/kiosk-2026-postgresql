@@ -598,9 +598,15 @@ Public Class AdminWindow
         SetWindowLong(hwnd, GWL_STYLE, style And Not WS_SYSMENU)
     End Sub
 
-    Private Sub btnSuppliers_Click(sender As Object, e As RoutedEventArgs) Handles btnSuppliers.Click
+    Private Sub BtnSuppliers_Click(sender As Object, e As RoutedEventArgs) Handles btnSuppliers.Click
         Me.Hide()
         Dim suppliersWindow As New SuppliersWindow
         suppliersWindow.Show()
+    End Sub
+
+    Private Sub BtnLottery_Click(sender As Object, e As RoutedEventArgs) Handles btnLottery.Click
+        Me.Hide()
+        Dim lotteryWindow As New LotteryWindow
+        lotteryWindow.Show()
     End Sub
 End Class
