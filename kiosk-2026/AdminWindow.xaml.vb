@@ -609,4 +609,10 @@ Public Class AdminWindow
         Dim lotteryWindow As New LotteryWindow
         lotteryWindow.Show()
     End Sub
+
+    Private Sub BtnReports_Click(sender As Object, e As RoutedEventArgs) Handles btnReports.Click
+        Me.Hide()
+        Dim reportsWindow As New ReportsWindow
+        reportsWindow.Show()
+    End Sub
 End Class

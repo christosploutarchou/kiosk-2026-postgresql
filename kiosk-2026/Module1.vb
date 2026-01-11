@@ -16,6 +16,7 @@ Module GlobalModule
     Public CategoriesWin As CategoriesWindow
     Public SuppliersWin As SuppliersWindow
     Public LotteryWin As LotteryWindow
+    Public ReportsWin As ReportsWindow
 
     'Public Conn As NpgsqlConnection
     Public username As String
