@@ -1,52 +1,46 @@
 ﻿<Window x:Class="ReportsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Αναφορές" Height="800" Width="1024" ResizeMode="NoResize" Background="#FFD4D0C8">
+        Title="Αναφορές" Height="800" Width="1024" ResizeMode="NoResize" Background="#FFD4D0C8"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Canvas>
-        <GroupBox x:Name="grpBoxReports" Height="434" Header="Επιλογή Αναφοράς" Width="514" Canvas.Left="8" Canvas.Top="20" FontSize="27" HorizontalAlignment="Left" VerticalAlignment="Center" >
+        <GroupBox x:Name="grpBoxReports" Height="280" Header="Επιλογή Αναφοράς" Width="317" Canvas.Left="8" Canvas.Top="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <StackPanel>
-                <RadioButton x:Name="rdbSalesPerProduct" Content="Πωλήσεις ανά Προϊόν" />
-                <RadioButton x:Name="rdbSalesPerVAT" Content="Πωλήσεις ανά Φ.Π.Α."  />
-                <RadioButton x:Name="rdbXReport" Content="Αναφορά ανά Βάρδια (Χ)"  />
-                <RadioButton x:Name="rdbZReport" Content="Ζ-Αναφορά " />
-                <RadioButton x:Name="rdbSalesPerCategory" Content="Πωλήσεις ανά κατηγορία" />
-                <RadioButton x:Name="rdbBuySellSupplier" Content="Τιμή Αγοράς/Πώλησης" />
-                <RadioButton x:Name="rdbSupplierPr" Content="Προϊόντα/Πωλήσεις ανά Προμηθευτή" />
-                <RadioButton x:Name="rdbUsers" Content="Ώρες ανά χρήστη" />
-                <RadioButton x:Name="rdbPayments" Content="Πληρωμές"/>
-                <RadioButton x:Name="rdbQntHistory" Content="Ιστορικό Ποσότητας / Τιμής"/>
+                <RadioButton x:Name="rdbSalesPerProduct" Content="Πωλήσεις ανά Προϊόν" Tag="SALES_PER_PRODUCT" Checked="ReportRadio_Checked"/>
+                <RadioButton x:Name="rdbSalesPerVAT" Content="Πωλήσεις ανά Φ.Π.Α." Tag="SALES_PER_VAT" Checked="ReportRadio_Checked" />
+                <RadioButton x:Name="rdbXReport" Content="Αναφορά ανά Βάρδια (Χ)" Tag="X_REPORT" Checked="ReportRadio_Checked" />
+                <RadioButton x:Name="rdbZReport" Content="Ζ-Αναφορά " Tag="Z_REPORT" Checked="ReportRadio_Checked" />
+                <RadioButton x:Name="rdbSalesPerCategory" Content="Πωλήσεις ανά κατηγορία" Tag="SALES_PER_CATEGORY" Checked="ReportRadio_Checked" />
+                <RadioButton x:Name="rdbBuySellSupplier" Content="Τιμή Αγοράς/Πώλησης" Tag="SALES_PER_SUPPLIER" Checked="ReportRadio_Checked" />
+                <RadioButton x:Name="rdbSupplierPr" Content="Προϊόντα/Πωλήσεις ανά Προμηθευτή" Tag="PRODUCTS_PER_SUPPLIER" Checked="ReportRadio_Checked" />
+                <RadioButton x:Name="rdbUsers" Content="Ώρες ανά χρήστη" Tag="HOURS_PER_USER" Checked="ReportRadio_Checked"/>
+                <RadioButton x:Name="rdbPayments" Content="Πληρωμές" Tag="PAYMENTS" Checked="ReportRadio_Checked"/>
+                <RadioButton x:Name="rdbQntHistory" Content="Ιστορικό Ποσότητας / Τιμής" Tag="QNT_HISTORY" Checked="ReportRadio_Checked"/>
                 <RadioButton x:Name="rdbSessions" Content="Ιστορικό Σύνδεσης" Tag="LOGIN_HISTORY" Checked="ReportRadio_Checked"/>
             </StackPanel>
         </GroupBox>
 
-
-        <DataGrid x:Name="dgvLinkedProducts"
-  AutoGenerateColumns="False"
-  CanUserAddRows="False"
-  IsReadOnly="True" HorizontalAlignment="Center" Canvas.Left="30" Canvas.Top="479" VerticalAlignment="Top" FontSize="27" Height="270" Width="962">
-
-            <!--DataGrid.Columns>
-                <DataGridTextColumn Header="Κωδικός"
-                    Binding="{Binding product_serno}" />
-
-                <DataGridTextColumn Header="Barcode"
-                    Binding="{Binding barcode}" />
-
-                <DataGridTextColumn Header="Περιγραφή"
-                    Binding="{Binding description}" />
-
-                <DataGridTextColumn Header="Ποσό πληρωμής"
-                    Binding="{Binding sell_amt}" />
-
-                <DataGridTextColumn Header="Διαθέσιμη Ποσότητα"
-                    Binding="{Binding avail_quantity}" />
-            </DataGrid.Columns-->
-        </DataGrid>
+        <DataGrid x:Name="dgvReports"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True" HorizontalAlignment="Center" Canvas.Left="30" Canvas.Top="349" VerticalAlignment="Top" Height="400" Width="962" FontSize="16"/>
 
         <!-- Buttons -->
-        <Button Content="Έξοδος" Width="144" Height="60" Canvas.Left="863" Canvas.Top="351" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtBoxBarcode" Background="#FFFFE1C0" FontSize="27" Canvas.Left="556" Canvas.Top="40" Width="340" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="btnClearBarcode" Content="" Width="50" Height="42" Canvas.Left="775" Canvas.Top="48" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Έξοδος" Width="144" Height="60" Canvas.Left="859" Canvas.Top="20" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="btnSearch" Content="Αναζήτηση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="90" Click="SearchButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Button x:Name="btnPrint" Content="Εκτπύπωση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="160" Click="SearchButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <!--Button x:Name="btnExportToExcel" Content="Excel" Width="144" Height="60" Canvas.Left="859" Canvas.Top="230" Click="SearchButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" /-->
+
+        <TextBox x:Name="txtBoxBarcode" Background="#FFFFE1C0" FontSize="27" Canvas.Left="452" Canvas.Top="50" Width="313" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Label x:Name="lblBarcode" Content="Barcode" Canvas.Left="350" Canvas.Top="50"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="lblFromDate" Content="Από" Canvas.Left="350" Canvas.Top="100"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="lblToDate" Content="Έως" Canvas.Left="350" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="16"/>
+        <DatePicker x:Name="dtpFrom" SelectedDate="{x:Static sys:DateTime.Now}" Canvas.Left="450" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="16" FirstDayOfWeek="Monday"/>
+        <DatePicker x:Name="dtpTo" SelectedDate="{x:Static sys:DateTime.Now}" Canvas.Left="450" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" FirstDayOfWeek="Monday"/>
+
 
 
     </Canvas>
