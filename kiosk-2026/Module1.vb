@@ -654,4 +654,18 @@ Module GlobalModule
         Return ""
     End Function
 
+    Public Function TruncateDecimal(value As Decimal, precision As Integer) As Decimal
+        If precision < 0 Then
+            Throw New ArgumentOutOfRangeException(NameOf(precision), "Precision must be zero or positive.")
+        End If
+
+        Dim factor As Decimal = 1D
+        For i As Integer = 1 To precision
+            factor *= 10D
+        Next
+
+        Return Decimal.Truncate(value * factor) / factor
+    End Function
+
+
 End Module

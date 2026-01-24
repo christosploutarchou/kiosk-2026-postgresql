@@ -22,32 +22,6 @@ INSERT INTO kiosks (description) VALUES ('X DRIVE LAKATAMIA');
 --users
 CREATE TABLE users (
     uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-	username VARCHAR(32),
-	fullname VARCHAR(64),
-	phone VARCHAR(32),
-	id_num VARCHAR(16),
-	pass VARCHAR(32),	
-	is_admin BOOLEAN DEFAULT FALSE,
-	can_view_reports BOOLEAN DEFAULT FALSE,
-	can_edit_products BOOLEAN DEFAULT FALSE,
-	can_edit_products_full BOOLEAN DEFAULT FALSE,    
-    created_at TIMESTAMP DEFAULT NOW(),
-	is_unlock BOOLEAN DEFAULT FALSE,
-    is_active BOOLEAN DEFAULT TRUE,
-	kioskid UUID NOT NULL,
-	
-	FOREIGN KEY (kioskid)
-        REFERENCES kiosks(kioskid)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
-
-
---
-
-CREATE TABLE users (
-    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     username varchar(32),
     deleted boolean,
     access_level boolean,
@@ -28815,7 +28789,7 @@ ON x_report (user_id, created_on DESC);
     vat         VARCHAR(2),
     amountvat   NUMERIC(10,2),
     inv_number  VARCHAR(32),
-    supplier_id VARCHAR(32),
+    supplier_id UUID,
     kioskid     UUID NOT NULL,
 
     CONSTRAINT fk_payments_kiosk

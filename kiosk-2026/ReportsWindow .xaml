@@ -24,13 +24,13 @@
         <DataGrid x:Name="dgvReports"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
-                  IsReadOnly="True" HorizontalAlignment="Center" Canvas.Left="30" Canvas.Top="349" VerticalAlignment="Top" Height="400" Width="962" FontSize="16"/>
+                  IsReadOnly="True" HorizontalAlignment="Center" Canvas.Left="30" Canvas.Top="379" VerticalAlignment="Top" Height="370" Width="962" FontSize="16"/>
 
         <!-- Buttons -->
         <Button x:Name="btnClearBarcode" Content="" Width="50" Height="42" Canvas.Left="775" Canvas.Top="48" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Content="Έξοδος" Width="144" Height="60" Canvas.Left="859" Canvas.Top="20" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="btnSearch" Content="Αναζήτηση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="90" Click="SearchButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Button x:Name="btnPrint" Content="Εκτπύπωση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="160" Click="SearchButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button x:Name="btnSearch" Content="Αναζήτηση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="90" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Button x:Name="btnPrint" Content="Εκτπύπωση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="160" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <!--Button x:Name="btnExportToExcel" Content="Excel" Width="144" Height="60" Canvas.Left="859" Canvas.Top="230" Click="SearchButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" /-->
 
         <TextBox x:Name="txtBoxBarcode" Background="#FFFFE1C0" FontSize="27" Canvas.Left="452" Canvas.Top="50" Width="313" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -40,8 +40,13 @@
         <Label x:Name="lblToDate" Content="Έως" Canvas.Left="350" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="16"/>
         <DatePicker x:Name="dtpFrom" SelectedDate="{x:Static sys:DateTime.Now}" Canvas.Left="450" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="16" FirstDayOfWeek="Monday"/>
         <DatePicker x:Name="dtpTo" SelectedDate="{x:Static sys:DateTime.Now}" Canvas.Left="450" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" FirstDayOfWeek="Monday"/>
-
-
+        <Label x:Name="lblTotalHoursOrAmount" Content="" Canvas.Left="350" Canvas.Top="200" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Label x:Name="lblAmountVAT" Content="" Canvas.Left="350" Canvas.Top="250" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <TextBox x:Name="txtBoxTotalHoursOrPayments"  FontSize="16" Canvas.Left="450" TextWrapping="Wrap" Text="TextBox" Canvas.Top="200" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="True"/>
+        <ComboBox x:Name="cmbUsers" DisplayMemberPath="Username" SelectedValuePath="Uuid" Canvas.Left="452" Canvas.Top="48" Width="386" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39"/>
+        <ComboBox x:Name="cmbSupplier"  DisplayMemberPath="Name" SelectedValuePath="Uuid" Canvas.Left="452" Canvas.Top="48" Width="386" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39"/>
+        <ComboBox x:Name="cmbCategories"  DisplayMemberPath="Name" SelectedValuePath="Uuid" Canvas.Left="452" Canvas.Top="48" Width="386" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39"/>
+        <CheckBox x:Name="chkBoxSalesPerSupplier" Content="CheckBox" Canvas.Left="660" Canvas.Top="114" FontSize="16 "/>
 
     </Canvas>
 </Window>
