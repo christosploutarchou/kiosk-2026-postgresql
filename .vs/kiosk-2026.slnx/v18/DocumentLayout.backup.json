@@ -26,16 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{08a1bf1d-7967-4afc-8253-1790862ab8c9}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -49,7 +41,8 @@
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\PosWindow.xaml",
               "RelativeToolTip": "kiosk-2026\\PosWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-06T16:03:33.833Z"
+              "WhenOpened": "2026-06-06T16:03:33.833Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -82,7 +75,7 @@
               "RelativeDocumentMoniker": "kiosk-2026\\PosWindow.xaml.vb",
               "ToolTip": "C:\\Users\\PC\\Desktop\\PROJECTS\\kiosk-2026-postgresql\\kiosk-2026\\PosWindow.xaml.vb",
               "RelativeToolTip": "kiosk-2026\\PosWindow.xaml.vb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAJwIAAAAAAAAAAAQwI8JAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2026-02-14T06:58:47.341Z",
               "EditorCaption": ""

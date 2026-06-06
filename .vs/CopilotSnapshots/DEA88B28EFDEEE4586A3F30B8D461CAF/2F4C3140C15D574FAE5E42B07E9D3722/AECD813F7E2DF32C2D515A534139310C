@@ -164,6 +164,10 @@ Public Class PosWindow
                 End Using
             End Using
 
+
+
+
+
             ' Reset UI for next input
             txtBoxQuantity.Text = "1"
             txtBoxBarcode.Focus()
@@ -172,7 +176,7 @@ Public Class PosWindow
 
         Catch ex As Exception
             CreateExceptionFile(ex.ToString(), sql)
-            MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             FormatDataGrid()
         End Try
@@ -1782,7 +1786,7 @@ Public Class PosWindow
                 Next
             Catch ex As Exception
                 CreateExceptionFile(ex.Message, " ")
-                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
 
             tmpTrxn = New tmpTransaction
@@ -2113,7 +2117,7 @@ Public Class PosWindow
 
     Private Sub TxtBoxBarcode_TextChanged(sender As Object, e As EventArgs) Handles txtBoxBarcode.TextChanged
         If Not isConnOpen() Then
-            MessageBox.Show(CANNOT_ACCESS_DB, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show(CANNOT_ACCESS_DB, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 

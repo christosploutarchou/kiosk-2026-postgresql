@@ -33,7 +33,7 @@
         <TextBox x:Name="txtBoxQuantity" HorizontalAlignment="Left" Margin="450,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="18" Grid.Column="1" Background="#FFFFE1C0"/>
         <Button x:Name="btnClearBarcode_Copy" HorizontalAlignment="Left" Margin="587,14,0,0" VerticalAlignment="Top" Height="30" Width="40" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
         <Button x:Name="btnClearBarcode_Copy1" HorizontalAlignment="Left" Margin="651,14,0,0" VerticalAlignment="Top" Height="30" Width="40" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
-        
+
         <Button x:Name="btnClearBarcode_Copy2" HorizontalAlignment="Left" Margin="27,396,0,0" VerticalAlignment="Top" Height="68" Width="107" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
         <Button x:Name="btnClearBarcode_Copy3" HorizontalAlignment="Left" Margin="157,396,0,0" VerticalAlignment="Top" Height="68" Width="107" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
         <Button x:Name="btnClearBarcode_Copy4" HorizontalAlignment="Left" Margin="291,396,0,0" VerticalAlignment="Top" Height="68" Width="107" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
@@ -54,6 +54,18 @@
         <Button x:Name="btnClearBarcode_Copy19" HorizontalAlignment="Left" Margin="297,315,0,0" VerticalAlignment="Top" Height="68" Width="107" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
         <Button x:Name="btnClearBarcode_Copy20" HorizontalAlignment="Left" Margin="435,315,0,0" VerticalAlignment="Top" Height="68" Width="107" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
         <Button x:Name="btnClearBarcode_Copy21" HorizontalAlignment="Left" Margin="589,315,0,0" VerticalAlignment="Top" Height="68" Width="107" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <TextBox x:Name="txtBoxManualAmt" Grid.Column="1" HorizontalAlignment="Left" Margin="809,359,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btn0" HorizontalAlignment="Left" Margin="794,439,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn1" HorizontalAlignment="Left" Margin="794,474,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn2" HorizontalAlignment="Left" Margin="794,507,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn3" HorizontalAlignment="Left" Margin="794,540,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn4" HorizontalAlignment="Left" Margin="795,581,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn5" HorizontalAlignment="Left" Margin="858,469,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn6" HorizontalAlignment="Left" Margin="858,504,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn7" HorizontalAlignment="Left" Margin="859,539,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn8" HorizontalAlignment="Left" Margin="859,574,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btn9" HorizontalAlignment="Left" Margin="859,616,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
+        <Button x:Name="btnDot" HorizontalAlignment="Left" Margin="920,616,0,0" VerticalAlignment="Top" Height="25" Width="51" Grid.Column="1" FontSize="27" Background="#FFD4D0C8"/>
 
     </Grid>
 </Window>

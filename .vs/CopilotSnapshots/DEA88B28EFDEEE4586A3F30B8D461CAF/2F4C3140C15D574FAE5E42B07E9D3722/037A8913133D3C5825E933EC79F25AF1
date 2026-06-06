@@ -164,6 +164,10 @@ Public Class PosWindow
                 End Using
             End Using
 
+
+
+
+
             ' Reset UI for next input
             txtBoxQuantity.Text = "1"
             txtBoxBarcode.Focus()
@@ -172,7 +176,7 @@ Public Class PosWindow
 
         Catch ex As Exception
             CreateExceptionFile(ex.ToString(), sql)
-            MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             FormatDataGrid()
         End Try
@@ -398,14 +402,14 @@ Public Class PosWindow
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         If dgvReceipt.RowCount > 0 Then
-            MessageBox.Show("Δεν μπορεί να γίνει έξοδος όταν υπάρχουν γραμμές προϊόντων", "Σφάλμα", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν μπορεί να γίνει έξοδος όταν υπάρχουν γραμμές προϊόντων", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
-        If MessageBox.Show("Έξοδος;", "Έξοδος", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+        If MessageBox.Show("Έξοδος;", "Έξοδος", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
             If Not isAdmin And Not canEditProducts And Not canEditProductsFull Then
                 If GenerateXreport(whois) Then
-                    If MessageBox.Show("Εκτύπωση Αναφοράς Βάρδιας;", "Εκτύπωση", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+                    If MessageBox.Show("Εκτύπωση Αναφοράς Βάρδιας;", "Εκτύπωση", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                         printType = "X"
                         PrintDocument1.PrinterSettings.Copies = 1
                         PrintDocument1.Print()
@@ -688,7 +692,7 @@ Public Class PosWindow
 
     Private Sub updateProductsAndQuantity(ByVal productDesc As String, ByVal quantity As Integer)
         If Not isConnOpen() Then
-            MessageBox.Show("Cannot connect to database, please try again", APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Cannot connect to database, please try again", APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
@@ -757,11 +761,11 @@ Public Class PosWindow
 
     Private Sub btn5percent_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn5percent.Click
         If Not isLoggedIn(username) Then
-            MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         If txtBoxManualAmt.Text = String.Empty Or txtBoxManualAmt.Text.Length = 0 Then
-            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για ΔΙΑΦΟΡΑ 5%", "Καταχώρηση Τιμής", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για ΔΙΑΦΟΡΑ 5%", "Καταχώρηση Τιμής", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         fillProductsAndQuantity("-308")
@@ -770,11 +774,11 @@ Public Class PosWindow
 
     Private Sub btn19percent_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn19percent.Click
         If Not isLoggedIn(username) Then
-            MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         If txtBoxManualAmt.Text = String.Empty Or txtBoxManualAmt.Text.Length = 0 Then
-            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για ΔΙΑΦΟΡΑ 19%", "Καταχώρηση Τιμής", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για ΔΙΑΦΟΡΑ 19%", "Καταχώρηση Τιμής", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         fillProductsAndQuantity("-309")
@@ -784,7 +788,7 @@ Public Class PosWindow
     Private Sub btnDiscount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDiscount.Click
         Dim tmpDiscount As Double
         If txtBoxManualAmt.Text = String.Empty Or txtBoxManualAmt.Text.Length = 0 Then
-            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για Έκπτωση", "Καταχώρηση Έκπτωσης", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για Έκπτωση", "Καταχώρηση Έκπτωσης", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         Else
             tmpDiscount = CDbl(txtBoxManualAmt.Text)
@@ -817,7 +821,7 @@ Public Class PosWindow
 
     Private Sub btnDiscountPercent_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDiscountPercent.Click
         If txtBoxManualAmt.Text = String.Empty Or txtBoxManualAmt.Text.Length = 0 Then
-            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για Ποσοστό Έκπτωσης", "Καταχώρηση Ποσοστού Έκπτωσης", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε καταχωρήσει τιμή για Ποσοστό Έκπτωσης", "Καταχώρηση Ποσοστού Έκπτωσης", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         Else
             Dim discountPercent As Double = CDbl(txtBoxManualAmt.Text)
@@ -841,7 +845,7 @@ Public Class PosWindow
 
     Private Sub btnPayment_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPayment.Click
         If txtBoxManualAmt.Text = String.Empty Or txtBoxManualAmt.Text.Length = 0 Then
-            MessageBox.Show("Δεν έχετε καταχωρήσει ποσό Πληρωμής", "Καταχώρηση Ποσού Πληρωμής", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε καταχωρήσει ποσό Πληρωμής", "Καταχώρηση Ποσού Πληρωμής", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         Else
             payment = CDbl(txtBoxManualAmt.Text)
@@ -855,7 +859,7 @@ Public Class PosWindow
 
     Private Sub btnVisa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVisa.Click
         If dgvReceipt.Rows.Count = 0 Then
-            MessageBox.Show("Δεν έχετε επιλέξει είδος αγοράς", "Επιλογή είδους αγοράς", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε επιλέξει είδος αγοράς", "Επιλογή είδους αγοράς", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         paymentMethod = "V"
@@ -864,7 +868,7 @@ Public Class PosWindow
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
         If dgvReceipt.Rows.Count = 0 Then
-            MessageBox.Show("Δεν έχετε επιλέξει είδος αγοράς", "Επιλογή είδους αγοράς", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε επιλέξει είδος αγοράς", "Επιλογή είδους αγοράς", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
         paymentMethod = "C"
@@ -1327,7 +1331,7 @@ Public Class PosWindow
                 dr.Close()
             Catch ex As Exception
                 CreateExceptionFile(ex.Message, " " & sql)
-                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
                 cmd.Dispose()
             End Try
@@ -1350,26 +1354,26 @@ Public Class PosWindow
 
     Private Async Sub BtnPayments_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPayments.Click
         If Not isConnOpen() Then
-            MessageBox.Show("Cannot connect to database, please try again", APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Cannot connect to database, please try again", APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
         If Not IsLoggedIn(username) Then
-            MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
         If txtBoxManualAmt.Text = String.Empty Or txtBoxManualAmt.Text.Length = 0 Then
-            MessageBox.Show("Δεν έχετε καταχωρήσει ποσό για έκδωση ΠΛΗΡΩΜΗΣ", "Καταχώρηση Τιμής", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show("Δεν έχετε καταχωρήσει ποσό για έκδωση ΠΛΗΡΩΜΗΣ", "Καταχώρηση Τιμής", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
-        If MessageBox.Show("Έκδοση Πληρωμής " & txtBoxManualAmt.Text & " ευρώ;", "Πληρωμή", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+        If MessageBox.Show("Έκδοση Πληρωμής " & txtBoxManualAmt.Text & " ευρώ;", "Πληρωμή", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
             frmPaymentInfo.ShowDialog()
 
             If tmpPaymentVAT = -1 Then
-                MessageBox.Show("Δεν έχετε επιλέξει είδος Φ.Π.Α", "Επιλογή Φ.Π.Α", MessageBoxButton.OK, MessageBoxImage.Error)
+                MessageBox.Show("Δεν έχετε επιλέξει είδος Φ.Π.Α", "Επιλογή Φ.Π.Α", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
@@ -1402,7 +1406,7 @@ Public Class PosWindow
                     Await CashOut(CDbl(txtBoxManualAmt.Text))
                 End If
 
-                If MessageBox.Show("Εκτύπωση Πληρωμής;", "Εκτύπωση Πληρωμής", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+                If MessageBox.Show("Εκτύπωση Πληρωμής;", "Εκτύπωση Πληρωμής", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                     printType = "P"
                     PrintDocument1.PrinterSettings.Copies = 1
                     PrintDocument1.Print()
@@ -1437,7 +1441,7 @@ Public Class PosWindow
     End Sub
 
     Private Sub btnKronos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKronos.Click
-        If MessageBox.Show("Εκτύπωση Αναφοράς ΚΡΟΝΟΥ;", "ΚΡΟΝΟΣ", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+        If MessageBox.Show("Εκτύπωση Αναφοράς ΚΡΟΝΟΥ;", "ΚΡΟΝΟΣ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
             printType = "K"
             PrintDocument1.PrinterSettings.Copies = 1
             PrintDocument1.Print()
@@ -1679,12 +1683,12 @@ Public Class PosWindow
 
     Private Sub btnHold_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHold.Click
         If dgvReceipt.Rows.Count = 0 And btnHold.Text = HOLD Then
-            MessageBox.Show("Δεν υπάρχει κάτι για κράτημα", "Κράτημα Συναλλαγής", MessageBoxButton.OK, MessageBoxImage.Information)
+            MessageBox.Show("Δεν υπάρχει κάτι για κράτημα", "Κράτημα Συναλλαγής", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
         If dgvReceipt.Rows.Count > 0 And btnHold.Text = RETRIEVE Then
-            MessageBox.Show("Δεν μπορεί να γίνει επαναφορά όταν υπάρχει ενεργή συναλλαγή", "Επαναφορά Συναλλαγής", MessageBoxButton.OK, MessageBoxImage.Information)
+            MessageBox.Show("Δεν μπορεί να γίνει επαναφορά όταν υπάρχει ενεργή συναλλαγή", "Επαναφορά Συναλλαγής", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -1782,7 +1786,7 @@ Public Class PosWindow
                 Next
             Catch ex As Exception
                 CreateExceptionFile(ex.Message, " ")
-                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
 
             tmpTrxn = New tmpTransaction
@@ -2113,7 +2117,7 @@ Public Class PosWindow
 
     Private Sub TxtBoxBarcode_TextChanged(sender As Object, e As EventArgs) Handles txtBoxBarcode.TextChanged
         If Not isConnOpen() Then
-            MessageBox.Show(CANNOT_ACCESS_DB, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show(CANNOT_ACCESS_DB, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 

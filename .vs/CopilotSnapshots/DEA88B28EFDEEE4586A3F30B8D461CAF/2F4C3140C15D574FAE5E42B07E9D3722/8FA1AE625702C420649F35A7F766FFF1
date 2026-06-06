@@ -164,6 +164,10 @@ Public Class PosWindow
                 End Using
             End Using
 
+
+
+
+
             ' Reset UI for next input
             txtBoxQuantity.Text = "1"
             txtBoxBarcode.Focus()
@@ -172,7 +176,7 @@ Public Class PosWindow
 
         Catch ex As Exception
             CreateExceptionFile(ex.ToString(), sql)
-            MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             FormatDataGrid()
         End Try
@@ -1402,7 +1406,7 @@ Public Class PosWindow
                     Await CashOut(CDbl(txtBoxManualAmt.Text))
                 End If
 
-                If MessageBox.Show("Εκτύπωση Πληρωμής;", "Εκτύπωση Πληρωμής", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+                If MessageBox.Show("Εκτύπωση Πληρωμής;", "Εκτύπωση Πληρωμής", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                     printType = "P"
                     PrintDocument1.PrinterSettings.Copies = 1
                     PrintDocument1.Print()
@@ -1437,7 +1441,7 @@ Public Class PosWindow
     End Sub
 
     Private Sub btnKronos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKronos.Click
-        If MessageBox.Show("Εκτύπωση Αναφοράς ΚΡΟΝΟΥ;", "ΚΡΟΝΟΣ", MessageBoxButton.YesNo, MessageBoxImage.Question) = MessageBoxResult.Yes Then
+        If MessageBox.Show("Εκτύπωση Αναφοράς ΚΡΟΝΟΥ;", "ΚΡΟΝΟΣ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
             printType = "K"
             PrintDocument1.PrinterSettings.Copies = 1
             PrintDocument1.Print()
@@ -1679,12 +1683,12 @@ Public Class PosWindow
 
     Private Sub btnHold_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHold.Click
         If dgvReceipt.Rows.Count = 0 And btnHold.Text = HOLD Then
-            MessageBox.Show("Δεν υπάρχει κάτι για κράτημα", "Κράτημα Συναλλαγής", MessageBoxButton.OK, MessageBoxImage.Information)
+            MessageBox.Show("Δεν υπάρχει κάτι για κράτημα", "Κράτημα Συναλλαγής", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
         If dgvReceipt.Rows.Count > 0 And btnHold.Text = RETRIEVE Then
-            MessageBox.Show("Δεν μπορεί να γίνει επαναφορά όταν υπάρχει ενεργή συναλλαγή", "Επαναφορά Συναλλαγής", MessageBoxButton.OK, MessageBoxImage.Information)
+            MessageBox.Show("Δεν μπορεί να γίνει επαναφορά όταν υπάρχει ενεργή συναλλαγή", "Επαναφορά Συναλλαγής", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -1782,7 +1786,7 @@ Public Class PosWindow
                 Next
             Catch ex As Exception
                 CreateExceptionFile(ex.Message, " ")
-                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+                MessageBox.Show(ex.Message, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
 
             tmpTrxn = New tmpTransaction
@@ -2113,7 +2117,7 @@ Public Class PosWindow
 
     Private Sub TxtBoxBarcode_TextChanged(sender As Object, e As EventArgs) Handles txtBoxBarcode.TextChanged
         If Not isConnOpen() Then
-            MessageBox.Show(CANNOT_ACCESS_DB, APPLICATION_ERROR, MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show(CANNOT_ACCESS_DB, APPLICATION_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
