@@ -27,7 +27,7 @@
                   IsReadOnly="True" HorizontalAlignment="Center" Canvas.Left="30" Canvas.Top="379" VerticalAlignment="Top" Height="370" Width="962" FontSize="16"/>
 
         <!-- Buttons -->
-        <Button x:Name="btnClearBarcode" Content="" Width="50" Height="42" Canvas.Left="775" Canvas.Top="48" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="btnClearBarcode" Content="" Width="50" Height="42" Canvas.Left="775" Canvas.Top="48" Click="BtnClearBarcode_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Content="Έξοδος" Width="144" Height="60" Canvas.Left="859" Canvas.Top="20" Click="ExitButton_Click" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button x:Name="btnSearch" Content="Αναζήτηση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="90" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <Button x:Name="btnPrint" Content="Εκτπύπωση" Width="144" Height="60" Canvas.Left="859" Canvas.Top="160" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -47,6 +47,6 @@
         <ComboBox x:Name="cmbSupplier"  DisplayMemberPath="Name" SelectedValuePath="Uuid" Canvas.Left="452" Canvas.Top="48" Width="386" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39"/>
         <ComboBox x:Name="cmbCategories"  DisplayMemberPath="Name" SelectedValuePath="Uuid" Canvas.Left="452" Canvas.Top="48" Width="386" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39"/>
         <CheckBox x:Name="chkBoxSalesPerSupplier" Content="CheckBox" Canvas.Left="660" Canvas.Top="114" FontSize="16 "/>
-
+        <ComboBox x:Name="cmbNoBarcode"  Canvas.Left="452" Canvas.Top="200" Width="386" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39"/>
     </Canvas>
 </Window>

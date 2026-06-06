@@ -58,6 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="PosWindow.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="LotteryWindow.xaml.vb">
       <SubType>Code</SubType>
     </Compile>

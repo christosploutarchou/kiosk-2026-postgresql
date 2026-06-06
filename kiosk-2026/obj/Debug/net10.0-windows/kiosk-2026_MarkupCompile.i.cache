@@ -10,11 +10,11 @@ none
 false
 ;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\PC\Desktop\PROJECTS\kiosk-2026-postgresql\kiosk-2026\Application.xaml
-8258600235
+9-1119342498
 
-14-799097264
-2091040163264
-AdminWindow.xaml;CategoriesWindow.xaml;LoginWindow.xaml;LotteryWindow.xaml;ReportsWindow .xaml;SuppliersWindow.xaml;UnlockWindow.xaml;UsersWindow.xaml;
+15-401143569
+209-856270381
+AdminWindow.xaml;CategoriesWindow.xaml;LoginWindow.xaml;LotteryWindow.xaml;PosWindow.xaml;ReportsWindow .xaml;SuppliersWindow.xaml;UnlockWindow.xaml;UsersWindow.xaml;
 
 False
 

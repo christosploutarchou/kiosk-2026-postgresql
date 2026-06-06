@@ -392,17 +392,14 @@ Public Class AdminWindow
         usersWindow.Show()
     End Sub
 
-    'Private Sub btnPos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPos.Click
-    '    If Not isLoggedIn(username) Then
-    '        MessageBox.Show("Ο χρήστης δεν ειναι συνδεμένος", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '        Exit Sub
-    '    End If
-    '    Me.Hide()
-    '    frmPOS.Show()
-    '    If dualMonitor Then
-    '        frmDual.Show()
-    '    End If
-    'End Sub
+    Private Sub BtnPos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
+        Me.Hide()
+        Dim posWindow As New PosWindow
+        posWindow.Show()
+        'If dualMonitor Then
+        'frmDual.Show()
+        'End If
+    End Sub
 
     'Private Sub btnReports_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReports.Click
     '    If Not isLoggedIn(username) Then
